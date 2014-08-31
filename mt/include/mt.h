@@ -1,0 +1,15 @@
+#pragma once
+
+#include "Global.h"
+#include "Kernel.h"
+#include "Mutex.h"
+#include "Event.h"
+#include "CriticalSection.h"
+#include "SharedMemory.h"
+#include "AutoLock.h"
+#include "KernelAutoPtr.h"
+#include "Semaphore.h"
+#include "Thread.h"
+#include "ThreadHandler.h"
+#include "WaitableCollection.h"
+#include "WaitableObject.h"
