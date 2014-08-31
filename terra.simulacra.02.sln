@@ -1,0 +1,58 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "mt", "mt\mt.vcxproj", "{426CEE86-A12C-4371-B284-4ECE5C35BCEA}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "socketd", "socketd\socketd.vcxproj", "{E60A4098-EA4C-413B-91E0-3AC8F1D467D2}"
+	ProjectSection(ProjectDependencies) = postProject
+		{9D39292F-AB4E-4008-964B-EAFF9E7A1047} = {9D39292F-AB4E-4008-964B-EAFF9E7A1047}
+	EndProjectSection
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "socketc", "socketc\socketc.vcxproj", "{034483EF-FE3F-465A-BEED-A699B8653FE8}"
+	ProjectSection(ProjectDependencies) = postProject
+		{9D39292F-AB4E-4008-964B-EAFF9E7A1047} = {9D39292F-AB4E-4008-964B-EAFF9E7A1047}
+		{426CEE86-A12C-4371-B284-4ECE5C35BCEA} = {426CEE86-A12C-4371-B284-4ECE5C35BCEA}
+	EndProjectSection
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "net", "net\net.vcxproj", "{9D39292F-AB4E-4008-964B-EAFF9E7A1047}"
+	ProjectSection(ProjectDependencies) = postProject
+		{426CEE86-A12C-4371-B284-4ECE5C35BCEA} = {426CEE86-A12C-4371-B284-4ECE5C35BCEA}
+	EndProjectSection
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "testing", "testing\testing.vcxproj", "{2611EA14-5C30-4522-80BC-EA93C18A5D70}"
+	ProjectSection(ProjectDependencies) = postProject
+		{9D39292F-AB4E-4008-964B-EAFF9E7A1047} = {9D39292F-AB4E-4008-964B-EAFF9E7A1047}
+		{426CEE86-A12C-4371-B284-4ECE5C35BCEA} = {426CEE86-A12C-4371-B284-4ECE5C35BCEA}
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Win32 = Debug|Win32
+		Release|Win32 = Release|Win32
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{426CEE86-A12C-4371-B284-4ECE5C35BCEA}.Debug|Win32.ActiveCfg = Debug|Win32
+		{426CEE86-A12C-4371-B284-4ECE5C35BCEA}.Debug|Win32.Build.0 = Debug|Win32
+		{426CEE86-A12C-4371-B284-4ECE5C35BCEA}.Release|Win32.ActiveCfg = Release|Win32
+		{426CEE86-A12C-4371-B284-4ECE5C35BCEA}.Release|Win32.Build.0 = Release|Win32
+		{E60A4098-EA4C-413B-91E0-3AC8F1D467D2}.Debug|Win32.ActiveCfg = Debug|Win32
+		{E60A4098-EA4C-413B-91E0-3AC8F1D467D2}.Debug|Win32.Build.0 = Debug|Win32
+		{E60A4098-EA4C-413B-91E0-3AC8F1D467D2}.Release|Win32.ActiveCfg = Release|Win32
+		{E60A4098-EA4C-413B-91E0-3AC8F1D467D2}.Release|Win32.Build.0 = Release|Win32
+		{034483EF-FE3F-465A-BEED-A699B8653FE8}.Debug|Win32.ActiveCfg = Debug|Win32
+		{034483EF-FE3F-465A-BEED-A699B8653FE8}.Debug|Win32.Build.0 = Debug|Win32
+		{034483EF-FE3F-465A-BEED-A699B8653FE8}.Release|Win32.ActiveCfg = Release|Win32
+		{034483EF-FE3F-465A-BEED-A699B8653FE8}.Release|Win32.Build.0 = Release|Win32
+		{9D39292F-AB4E-4008-964B-EAFF9E7A1047}.Debug|Win32.ActiveCfg = Debug|Win32
+		{9D39292F-AB4E-4008-964B-EAFF9E7A1047}.Debug|Win32.Build.0 = Debug|Win32
+		{9D39292F-AB4E-4008-964B-EAFF9E7A1047}.Release|Win32.ActiveCfg = Release|Win32
+		{9D39292F-AB4E-4008-964B-EAFF9E7A1047}.Release|Win32.Build.0 = Release|Win32
+		{2611EA14-5C30-4522-80BC-EA93C18A5D70}.Debug|Win32.ActiveCfg = Debug|Win32
+		{2611EA14-5C30-4522-80BC-EA93C18A5D70}.Debug|Win32.Build.0 = Debug|Win32
+		{2611EA14-5C30-4522-80BC-EA93C18A5D70}.Release|Win32.ActiveCfg = Release|Win32
+		{2611EA14-5C30-4522-80BC-EA93C18A5D70}.Release|Win32.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
