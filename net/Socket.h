@@ -23,6 +23,7 @@ public:
 	int Send(char* buffer);
 	int Shutdown();
 	int Receive(char* recvbuf, int recvbuflen);
+	int ConnectToServer();
 	int Listen();
 	SOCKET Accept(void);
 protected:

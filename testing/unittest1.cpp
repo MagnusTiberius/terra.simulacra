@@ -16,13 +16,13 @@ namespace testing
 		TEST_METHOD(TestMethod1)
 		{
 			SocketServer s(DEFAULT_DOMAIN, (int)DEFAULT_PORT);
-			//s.Listen();
-			//SOCKET socket = s.Accept();
+			s.Listen();
+			SOCKET socket = s.Accept();
 		}
 
 		TEST_METHOD(TestMethod2)
 		{
-			bbg::Socket* s = new bbg::Socket (DEFAULT_DOMAIN, (int)DEFAULT_PORT);
+			Socket* s = new Socket (DEFAULT_DOMAIN, (int)DEFAULT_PORT);
 		}
 
 	};

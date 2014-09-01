@@ -25,8 +25,9 @@ Socket::Socket(std::wstring domain, int port)
 	{
 		m_port = (PCSTR)port;
 	}
+	std::string addr(domain.begin(), domain.end());
 	// Resolve the server address and port
-	iResult = getaddrinfo(NULL, m_port, &hints, &result);
+	iResult = getaddrinfo(addr.c_str(), m_port, &hints, &result);
 	if (iResult != 0) {
 		printf("getaddrinfo failed with error: %d\n", iResult);
 		WSACleanup();
@@ -34,6 +35,18 @@ Socket::Socket(std::wstring domain, int port)
 	}
 	return;
 
+
+}
+
+
+Socket::~Socket(void)
+{
+	closesocket(ConnectSocket);
+	WSACleanup();
+}
+
+int Socket::ConnectToServer()
+{
 	// Attempt to connect to an address until one succeeds
 	for (ptr = result; ptr != NULL; ptr = ptr->ai_next) {
 
@@ -43,7 +56,7 @@ Socket::Socket(std::wstring domain, int port)
 		if (ConnectSocket == INVALID_SOCKET) {
 			printf("socket failed with error: %ld\n", WSAGetLastError());
 			WSACleanup();
-			return;
+			return 1;
 		}
 
 		// Connect to server.
@@ -61,15 +74,10 @@ Socket::Socket(std::wstring domain, int port)
 	if (ConnectSocket == INVALID_SOCKET) {
 		printf("Unable to connect to server!\n");
 		WSACleanup();
-		return;
+		return 1;
 	}
-}
 
-
-Socket::~Socket(void)
-{
-	closesocket(ConnectSocket);
-	WSACleanup();
+	return 0;
 }
 
 int Socket::Send(char* buffer)

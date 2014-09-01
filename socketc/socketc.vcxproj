@@ -43,7 +43,7 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>$(SolutionDir)\mt\;$(SolutionDir)\mt\include\;$(IncludePath)</IncludePath>
+    <IncludePath>$(SolutionDir)\net\;$(SolutionDir)\mt\;$(SolutionDir)\mt\include\;$(SolutionDir)\mt\;$(SolutionDir)\mt\include\;$(IncludePath)</IncludePath>
     <LibraryPath>$(SolutionDir)\$(Configuration);$(LibraryPath);$(VCInstallDir)lib;$(VCInstallDir)atlmfc\lib;$(WindowsSDK_LibraryPath_x86);</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -85,6 +85,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="client.h" />
+    <ClInclude Include="ClientSocket.h" />
     <ClInclude Include="Resource.h" />
     <ClInclude Include="socketc.h" />
     <ClInclude Include="stdafx.h" />
@@ -92,6 +93,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="client.cpp" />
+    <ClCompile Include="ClientSocket.cpp" />
     <ClCompile Include="socketc.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
