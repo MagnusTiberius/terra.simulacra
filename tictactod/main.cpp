@@ -7,6 +7,7 @@
 int _tmain(int argc, _TCHAR* argv[])
 {
 	TictactoeServer server;
+	server.Start();
 	return 0;
 }
 

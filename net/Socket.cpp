@@ -34,8 +34,6 @@ Socket::Socket(std::wstring domain, int port)
 		return;
 	}
 	return;
-
-
 }
 
 

@@ -30,6 +30,9 @@
     <ClInclude Include="TictactodThread.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="SocketdHandler.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -42,6 +45,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="TictactodThread.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SocketdHandler.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

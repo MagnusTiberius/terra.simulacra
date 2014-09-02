@@ -2,6 +2,7 @@
 
 
 TictactoeServer::TictactoeServer(void)
+	:SocketServer(DEFAULT_DOMAIN, (int)DEFAULT_PORT)
 {
 }
 
@@ -15,8 +16,8 @@ void TictactoeServer::Start(void)
 	do {
 		printf("Listening...\n");
 		SOCKET clientSocket = Accept();
-		SocketdThread* socketdThread = SocketdThread::Create(clientSocket);
-		auto w = socketdThread->Wait(100);
-		delete socketdThread;
+		TictactodThread* t = TictactodThread::Create(clientSocket);
+		auto w = t->Wait(100);
+		delete t;
 	} while (true);
 }
