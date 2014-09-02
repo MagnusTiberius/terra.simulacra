@@ -27,6 +27,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "testing", "testing\testing.
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "lib_json", "jsoncpp-master\makefiles\msvc2010\lib_json.vcxproj", "{1E6C2C1C-6453-4129-AE3F-0EE8E6599C89}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "protocol", "protocol\protocol.vcxproj", "{007A33E2-9ED0-4858-896D-C6825D1215AC}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Win32 = Debug|Win32
@@ -73,6 +75,12 @@ Global
 		{1E6C2C1C-6453-4129-AE3F-0EE8E6599C89}.Release|Win32.Build.0 = Release|Win32
 		{1E6C2C1C-6453-4129-AE3F-0EE8E6599C89}.Release|x64.ActiveCfg = Release|x64
 		{1E6C2C1C-6453-4129-AE3F-0EE8E6599C89}.Release|x64.Build.0 = Release|x64
+		{007A33E2-9ED0-4858-896D-C6825D1215AC}.Debug|Win32.ActiveCfg = Debug|Win32
+		{007A33E2-9ED0-4858-896D-C6825D1215AC}.Debug|Win32.Build.0 = Debug|Win32
+		{007A33E2-9ED0-4858-896D-C6825D1215AC}.Debug|x64.ActiveCfg = Debug|Win32
+		{007A33E2-9ED0-4858-896D-C6825D1215AC}.Release|Win32.ActiveCfg = Release|Win32
+		{007A33E2-9ED0-4858-896D-C6825D1215AC}.Release|Win32.Build.0 = Release|Win32
+		{007A33E2-9ED0-4858-896D-C6825D1215AC}.Release|x64.ActiveCfg = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
