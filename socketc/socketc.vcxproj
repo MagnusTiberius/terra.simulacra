@@ -84,7 +84,6 @@
     <Text Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="client.h" />
     <ClInclude Include="ClientSocket.h" />
     <ClInclude Include="Resource.h" />
     <ClInclude Include="socketc.h" />
@@ -92,7 +91,6 @@
     <ClInclude Include="targetver.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="client.cpp" />
     <ClCompile Include="ClientSocket.cpp" />
     <ClCompile Include="socketc.cpp" />
     <ClCompile Include="stdafx.cpp">
