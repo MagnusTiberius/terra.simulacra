@@ -2,10 +2,11 @@
 //
 
 #include "stdafx.h"
-
+#include "TictactoeServer.h"
 
 int _tmain(int argc, _TCHAR* argv[])
 {
+	TictactoeServer server;
 	return 0;
 }
 
