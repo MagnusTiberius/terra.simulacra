@@ -29,6 +29,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "lib_json", "jsoncpp-master\
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "protocol", "protocol\protocol.vcxproj", "{007A33E2-9ED0-4858-896D-C6825D1215AC}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "tictactod", "tictactod\tictactod.vcxproj", "{3F7E120C-E830-4141-BD00-7BBC2C56AE56}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Win32 = Debug|Win32
@@ -81,6 +83,12 @@ Global
 		{007A33E2-9ED0-4858-896D-C6825D1215AC}.Release|Win32.ActiveCfg = Release|Win32
 		{007A33E2-9ED0-4858-896D-C6825D1215AC}.Release|Win32.Build.0 = Release|Win32
 		{007A33E2-9ED0-4858-896D-C6825D1215AC}.Release|x64.ActiveCfg = Release|Win32
+		{3F7E120C-E830-4141-BD00-7BBC2C56AE56}.Debug|Win32.ActiveCfg = Debug|Win32
+		{3F7E120C-E830-4141-BD00-7BBC2C56AE56}.Debug|Win32.Build.0 = Debug|Win32
+		{3F7E120C-E830-4141-BD00-7BBC2C56AE56}.Debug|x64.ActiveCfg = Debug|Win32
+		{3F7E120C-E830-4141-BD00-7BBC2C56AE56}.Release|Win32.ActiveCfg = Release|Win32
+		{3F7E120C-E830-4141-BD00-7BBC2C56AE56}.Release|Win32.Build.0 = Release|Win32
+		{3F7E120C-E830-4141-BD00-7BBC2C56AE56}.Release|x64.ActiveCfg = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
