@@ -46,6 +46,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "tictactoc", "tictactoc\tict
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "tictactol", "tictactol\tictactol.vcxproj", "{3267E0A1-A3A3-4507-99DF-9C1DA8FE42D9}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "xmd", "xmd\xmd.vcxproj", "{0B091389-62EC-4F1D-99E2-4663A6BA6286}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Win32 = Debug|Win32
@@ -116,6 +118,12 @@ Global
 		{3267E0A1-A3A3-4507-99DF-9C1DA8FE42D9}.Release|Win32.ActiveCfg = Release|Win32
 		{3267E0A1-A3A3-4507-99DF-9C1DA8FE42D9}.Release|Win32.Build.0 = Release|Win32
 		{3267E0A1-A3A3-4507-99DF-9C1DA8FE42D9}.Release|x64.ActiveCfg = Release|Win32
+		{0B091389-62EC-4F1D-99E2-4663A6BA6286}.Debug|Win32.ActiveCfg = Debug|Win32
+		{0B091389-62EC-4F1D-99E2-4663A6BA6286}.Debug|Win32.Build.0 = Debug|Win32
+		{0B091389-62EC-4F1D-99E2-4663A6BA6286}.Debug|x64.ActiveCfg = Debug|Win32
+		{0B091389-62EC-4F1D-99E2-4663A6BA6286}.Release|Win32.ActiveCfg = Release|Win32
+		{0B091389-62EC-4F1D-99E2-4663A6BA6286}.Release|Win32.Build.0 = Release|Win32
+		{0B091389-62EC-4F1D-99E2-4663A6BA6286}.Release|x64.ActiveCfg = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
