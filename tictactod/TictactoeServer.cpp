@@ -13,6 +13,8 @@ TictactoeServer::~TictactoeServer(void)
 
 void TictactoeServer::Start(void)
 {
+	auto ref = BoardManager::Instance();
+	ref->Init();
 	do {
 		printf("Listening...\n");
 		SOCKET clientSocket = Accept();

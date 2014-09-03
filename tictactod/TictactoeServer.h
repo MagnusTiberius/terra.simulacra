@@ -1,6 +1,7 @@
 #pragma once
 #include "SocketServer.h"
 #include "TictactodThread.h"
+#include "BoardManager.h"
 
 using namespace bbg;
 
