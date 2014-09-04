@@ -48,7 +48,7 @@ void Util::GenerateRandomChars(char *s, const int len)
 		int t = m % n;
         s[i] = alphanum[t];
     }
-    //s[len] = 0;
+    s[len] = 0;
 }
 
 

@@ -16,7 +16,7 @@ User::~User(void)
 
 void User::SetLoginId(std::string v)
 {
-	m_LoginId = v;
+	m_LoginId = std::string(v);
 }
 
 

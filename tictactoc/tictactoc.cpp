@@ -4,7 +4,8 @@
 #include "stdafx.h"
 #include "ClientSocket.h"
 #include "User.h"
-
+#include <chrono>
+#include <thread>
 
 int _tmain(int argc, _TCHAR* argv[])
 {
@@ -19,7 +20,7 @@ int _tmain(int argc, _TCHAR* argv[])
 		std::string s ;
 		char* buf;
 		int iResult;
-
+		printf("Count: %ld\n", n);
 		if (n == 1)
 		{
 			s = "LOGIN " + user.GetLoginId() + " ;";
@@ -34,22 +35,43 @@ int _tmain(int argc, _TCHAR* argv[])
 		}
 		if (n == 2)
 		{
-			string q = Util::GetRandomQuote();
-			s = "SAY " + user.GetLoginId() + " \"" + q + "\" ;";
-			buf = const_cast<char*>(s.c_str());
-			iResult = client.Send(buf);
-			printf("Bytes Sent: %ld\n", iResult);
+			for(int k=0; k<20; k++)
+			{
+				printf("Quite Count: %ld\n", k);
+				string q = Util::GetRandomQuote();
+				s = "SAY " + user.GetLoginId() + "-" + std::to_string(k+1) + " \"" + q + "\" ;";
+				buf = const_cast<char*>(s.c_str());
+				iResult = client.Send(buf);
+				if (iResult == SOCKET_ERROR) 
+				{
+					printf("send failed with error: %d\n", WSAGetLastError());
+					exit(1);
+				}
+				printf("Bytes Sent: %ld\n", iResult);
+				std::chrono::milliseconds dura( 10 );
+				std::this_thread::sleep_for( dura );
+			}
 		}
 		if (n == 3)
 		{
 			s = "QUIT ";
 			buf = const_cast<char*>(s.c_str());
 			iResult = client.Send(buf);
+			if (iResult == SOCKET_ERROR) 
+			{
+				printf("send failed with error: %d\n", WSAGetLastError());
+				exit(1);
+			}
 			printf("Bytes Sent: %ld\n", iResult);
 		}
 		if (n == 4)
 		{
 			iResult = client.Shutdown();
+			if (iResult == SOCKET_ERROR) 
+			{
+				printf("send failed with error: %d\n", WSAGetLastError());
+				exit(1);
+			}
 			printf("Bytes Sent: %ld\n", iResult);
 		}
 
@@ -61,6 +83,9 @@ int _tmain(int argc, _TCHAR* argv[])
 		else
 			printf("recv failed with error: %d\n", WSAGetLastError());
 	}
+	std::chrono::milliseconds dura( 500 );
+	std::this_thread::sleep_for( dura );
+
 	return 0;
 }
 

@@ -10,6 +10,9 @@ public:
 	TictactodThread(SocketdHandler* socketdHandler);
 	~TictactodThread(void);
 	static TictactodThread* Create(SOCKET clientSocket);
+	BOOL isHandlerDone();
+	void SetSocket(SOCKET clientSocket);
+	BOOL isSocketOpen();
 private:
 	SocketdHandler* m_pSocketdHandler;
 };

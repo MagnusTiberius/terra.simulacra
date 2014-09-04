@@ -22,6 +22,7 @@ namespace bbg{
 		int GetPriority(void);
 		LPDWORD GetThreadId(void);
 		BOOL GetExitCode(DWORD* pdwExitCode);
+		void SetHandler(ThreadHandler* pcThreadHandler);
 	private:
 		Thread(void);
 		static DWORD WINAPI CallThreadHandlerProc(void* pThreadHandler);

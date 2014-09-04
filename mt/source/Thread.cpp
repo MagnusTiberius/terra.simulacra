@@ -10,6 +10,7 @@ namespace bbg{
 
 	Thread::Thread(void)
 	{
+		m_hHandle = NULL;
 	}
 
 	Thread::~Thread()
@@ -20,10 +21,21 @@ namespace bbg{
 		m_hHandle = NULL;
 	}
 
+	void Thread::SetHandler(ThreadHandler* pcThreadHandler)
+	{
+		if (m_hHandle != NULL) 
+		{
+			::TerminateThread(m_hHandle, 1);
+		}
+		m_lpThreadHandler = pcThreadHandler;
+		m_hHandle = ::CreateThread(NULL, 0, CallThreadHandlerProc, reinterpret_cast<LPVOID>(m_lpThreadHandler), NULL, m_uiThreadID);
+	}
+
 	DWORD WINAPI Thread::CallThreadHandlerProc(void* pThreadHandler)
 	{
 		ThreadHandler* pcHandler = reinterpret_cast<ThreadHandler*>(pThreadHandler);
-		return pcHandler->ThreadHandlerProc();
+		int v =  pcHandler->ThreadHandlerProc();
+		return v;
 	}
 
 	DWORD Thread::Suspend(void)

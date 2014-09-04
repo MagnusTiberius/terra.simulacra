@@ -11,5 +11,8 @@ public:
 	TictactoeServer(void);
 	~TictactoeServer(void);
 	void Start(void);
+	TictactodThread* ReuseThread(void);
+private:
+	std::map<std::string, TictactodThread*> m_ThreadList;
 };
 
