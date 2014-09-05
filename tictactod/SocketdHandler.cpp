@@ -5,10 +5,12 @@ SocketdHandler::SocketdHandler(SOCKET clientSocket):
 		ThreadHandler()
 {
 	m_clientSocket = clientSocket;
+	requestDataManager = RequestDataManager::Instance();
 }
 
 SocketdHandler::~SocketdHandler()
 {
+	delete requestDataManager;
 }
 
 void SocketdHandler::SetSocket(SOCKET socket)
@@ -44,6 +46,26 @@ unsigned SocketdHandler::ThreadHandlerProc(void)
 	while ( true ) 
 	{
 		iResult = recv(m_clientSocket, recvbuf, recvbuflen, 0);
+		//printf("VVVVVVVVVVVVVVVVVVVVVVVVVVVVVV\n");
+		//printf("Bytes received: %d\n", iResult);
+		//printf("Content: %s\n", recvbuf);
+		//printf("------------------------------\n");
+		char* sbuf = (char*)malloc(sizeof(char)*iResult);
+		memset(sbuf,0,iResult);
+		memcpy(sbuf,&recvbuf[0],iResult);
+		//printf("Content 2: %s\n", sbuf);
+		//printf("^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n\n\n");
+		std::vector<string> listReceive = bbg::Util::GatherMessages(sbuf,iResult);
+		requestDataManager->GrantWriterAccess();
+		for(auto itm : listReceive)
+		{
+			auto requestData = new RequestData();
+			std::string ssbuf(sbuf);
+			requestData->SetMessage(itm);
+			printf("Content 2*: %s\n", itm.c_str());
+			requestDataManager->AddRequestData(requestData);
+		}
+		requestDataManager->ReleaseWriterAccess();
 		if (iResult > 0) 
 		{
 			printf("Bytes received: %d\n", iResult);
@@ -77,15 +99,15 @@ unsigned SocketdHandler::ThreadHandlerProc(void)
 				printf("Server shutting down... \n");
 			}
 			// Echo the buffer back to the sender
-			int iSendResult = send(m_clientSocket, recvbuf, iResult, 0);
-			if (iSendResult == SOCKET_ERROR) {
-				printf("send failed with error: %d\n", WSAGetLastError());
-				closesocket(m_clientSocket);
-				//WSACleanup();
-				isDone = true;
-				break;
-			}
-			printf("Bytes sent: %d\n", iSendResult);
+			//int iSendResult = send(m_clientSocket, recvbuf, iResult, 0);
+			//if (iSendResult == SOCKET_ERROR) {
+			//	printf("send failed with error: %d\n", WSAGetLastError());
+			//	closesocket(m_clientSocket);
+			//	//WSACleanup();
+			//	isDone = true;
+			//	break;
+			//}
+			//printf("Bytes sent: %d\n", iSendResult);
 		}
 		else if (iResult == 0)
 		{

@@ -54,7 +54,7 @@ int _tmain(int argc, _TCHAR* argv[])
 		}
 		if (n == 3)
 		{
-			s = "QUIT ";
+			s = "QUIT ;";
 			buf = const_cast<char*>(s.c_str());
 			iResult = client.Send(buf);
 			if (iResult == SOCKET_ERROR) 
@@ -75,17 +75,16 @@ int _tmain(int argc, _TCHAR* argv[])
 			printf("Bytes Sent: %ld\n", iResult);
 		}
 
-		iResult = client.Receive(receiveBuffer, 512);
-		if (iResult > 0)
-			printf("Bytes received: %d\n", iResult);
-		else if (iResult == 0)
-			printf("Connection closed\n");
-		else
-			printf("recv failed with error: %d\n", WSAGetLastError());
+		//iResult = client.Receive(receiveBuffer, 512);
+		//if (iResult > 0)
+		//	printf("Bytes received: %d\n", iResult);
+		//else if (iResult == 0)
+		//	printf("Connection closed\n");
+		//else
+		//	printf("recv failed with error: %d\n", WSAGetLastError());
 	}
 	std::chrono::milliseconds dura( 500 );
 	std::this_thread::sleep_for( dura );
-
 	return 0;
 }
 

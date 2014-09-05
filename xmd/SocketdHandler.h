@@ -2,10 +2,7 @@
 
 #include "ThreadHandler.h"
 #include "BoardManager.h"
-
-
-#define DEFAULT_BUFLEN 512
-#define DEFAULT_PORT "27015"
+#include "NetGlobal.h"
 
 class SocketdHandler : public bbg::ThreadHandler
 {

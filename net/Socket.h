@@ -7,10 +7,7 @@
 #include <stdio.h>
 
 #include "Url.h"
-
-#define DEFAULT_BUFLEN 512
-#define DEFAULT_PORT "27015"
-#define DEFAULT_DOMAIN L"127.0.0.1"
+#include "NetGlobal.h"
 
 namespace bbg {
 

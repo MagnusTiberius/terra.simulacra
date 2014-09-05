@@ -2,10 +2,10 @@
 
 #include "ThreadHandler.h"
 #include "BoardManager.h"
-
-
-#define DEFAULT_BUFLEN 512
-#define DEFAULT_PORT "27015"
+#include "NetGlobal.h"
+#include "RequestDataManager.h"
+#include "RequestData.h"
+#include "Util.h"
 
 class SocketdHandler : public bbg::ThreadHandler
 {
@@ -21,5 +21,6 @@ public:
 private:
 	SOCKET m_clientSocket;
 	BOOL isDone;
+	RequestDataManager* requestDataManager;
 };
 

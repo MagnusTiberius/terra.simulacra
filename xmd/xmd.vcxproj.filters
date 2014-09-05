@@ -39,12 +39,6 @@
     <ClInclude Include="TictactoeServer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="ClientManager.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="ClientXm.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -60,12 +54,6 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="TictactoeServer.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="ClientManager.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="ClientXm.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

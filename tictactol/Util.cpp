@@ -107,6 +107,33 @@ string Util::Token(int len)
 	return t;
 }
 
+std::vector<string> Util::GatherMessages(char* str, int len)
+{
+	std::vector<string> list;
+	string message;
+	BOOL isValid = false;
+	for(int i=0; i<len; i++)
+	{
+		isValid = false;
+		while(str[i]!=';' && i<len) 
+		{
+			message = message + str[i];
+			i++;
+		}
+		if (str[i]==';') 
+			isValid = true;
+		if (i<len)
+		{
+			message = message + str[i];
+			i++;
+		}
+		if (message.size() > 0 && isValid)
+			list.push_back(message);
+		message = "";
+	}
+	return list;
+}
+
 std::vector<string> Util::Parse(char* str,const char* delim, int len)
 {
 	std::vector<string> list;
@@ -129,7 +156,7 @@ std::vector<string> Util::Parse(char* str,const char* delim, int len)
 					token = token + str[i];
 					i++;
 				}
-				i++;
+				if (i<len) i++;
 				list.push_back(token);
 			}
 			if (str[i] == '\'' )
@@ -141,7 +168,7 @@ std::vector<string> Util::Parse(char* str,const char* delim, int len)
 					token = token + str[i];
 					i++;
 				}
-				i++;
+				if (i<len) i++;
 				list.push_back(token);
 			}
 			if (str[i] != ' ' )
@@ -157,9 +184,13 @@ std::vector<string> Util::Parse(char* str,const char* delim, int len)
 		else
 		{
 			token = "";
-			while(str[i] !=' ' && i<len) 
+			while((str[i] !=' ' && str[i] !=';') && i<len) 
 			{
 				token = token + str[i];
+				i++;
+			}
+			if (str[i] ==';' && i<len)
+			{
 				i++;
 			}
 			list.push_back(token);

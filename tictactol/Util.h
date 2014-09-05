@@ -23,6 +23,7 @@ public:
 	static string Token(int len);
 	static std::vector<string> Parse(char* str,const char* delim, int len);
 	static string Util::GetRandomQuote();
+	static std::vector<string> GatherMessages(char* buf, int len);
 };
 
 

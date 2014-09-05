@@ -80,6 +80,10 @@ int Socket::ConnectToServer()
 
 int Socket::Send(char* buffer)
 {
+	//int sz = strlen(buffer)+1;
+	//char* sbuf = (char*)malloc(sz);
+	//memset(sbuf,0,sz);
+	//memcpy(sbuf, buffer, strlen(buffer));
 	iResult = send(ConnectSocket, buffer, (int)strlen(buffer), 0);
 	return iResult;
 }

@@ -39,7 +39,9 @@
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
-  <PropertyGroup />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <IncludePath>$(SolutionDir)\mt\include\;$(SolutionDir)\mt\;$(SolutionDir)\net\;$(SolutionDir)\net\include;$(VCInstallDir)include;$(VCInstallDir)atlmfc\include;$(WindowsSDK_IncludePath);</IncludePath>
+  </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <PrecompiledHeader>
@@ -78,12 +80,18 @@
   <ItemGroup>
     <ClInclude Include="Board.h" />
     <ClInclude Include="BoardManager.h" />
+    <ClInclude Include="RequestData.h" />
+    <ClInclude Include="RequestDataAgents.h" />
+    <ClInclude Include="RequestDataManager.h" />
     <ClInclude Include="User.h" />
     <ClInclude Include="Util.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Board.cpp" />
     <ClCompile Include="BoardManager.cpp" />
+    <ClCompile Include="RequestData.cpp" />
+    <ClCompile Include="RequestDataAgents.cpp" />
+    <ClCompile Include="RequestDataManager.cpp" />
     <ClCompile Include="User.cpp" />
     <ClCompile Include="Util.cpp" />
   </ItemGroup>
