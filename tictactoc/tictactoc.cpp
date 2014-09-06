@@ -35,11 +35,12 @@ int _tmain(int argc, _TCHAR* argv[])
 		}
 		if (n == 2)
 		{
-			for(int k=0; k<20; k++)
+			for(int k=0; k<100; k++)
 			{
 				printf("Quite Count: %ld\n", k);
 				string q = Util::GetRandomQuote();
-				s = "SAY " + user.GetLoginId() + "-" + std::to_string(k+1) + " \"" + q + "\" ;";
+				//s = "SAY " + user.GetLoginId() + "-" + std::to_string(k+1) + " \"" + q + "\" ;";
+				s = "SAY " + user.GetLoginId() + " \"" + q + "\" ;";
 				buf = const_cast<char*>(s.c_str());
 				iResult = client.Send(buf);
 				if (iResult == SOCKET_ERROR) 
@@ -48,7 +49,7 @@ int _tmain(int argc, _TCHAR* argv[])
 					exit(1);
 				}
 				printf("Bytes Sent: %ld\n", iResult);
-				std::chrono::milliseconds dura( 10 );
+				std::chrono::milliseconds dura( 100 );
 				std::this_thread::sleep_for( dura );
 			}
 		}

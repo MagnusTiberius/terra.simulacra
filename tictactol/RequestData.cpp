@@ -1,5 +1,6 @@
 #include "RequestData.h"
 
+namespace bbg {
 
 int RequestData::SeqID = 0;
 
@@ -24,12 +25,24 @@ std::string RequestData::GetUserID()
 	return m_UserID;
 }
 
-void RequestData::SetMessage(std::string v)
+void RequestData::SetMessageData(std::string v)
 {
 	m_Message = v;
 }
 
-std::string RequestData::GetMessage()
+std::string RequestData::GetMessageData()
 {
 	return m_Message;
+}
+
+void RequestData::SetSocket(int v)
+{
+	m_Socket = v;
+}
+
+int RequestData::GetSocket()
+{
+	return m_Socket;
+}
+
 }

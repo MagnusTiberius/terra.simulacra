@@ -9,6 +9,7 @@
 #include <vector>
 
 #include "CircularBuffer.h"
+#include "RequestData.h"
 
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 using namespace bbg;
@@ -51,37 +52,54 @@ namespace testing
 			auto list = Util::Parse(buf, ";", strlen(buf));
 		}
 
-		TEST_METHOD(TestMethod6)
-		{
-			CircularBuffer<ElemType> cb;
-			cb.Init(512);
-			ElemType et;
-			et.value = 4;
-			cb.Write(&et);
-			ElemType et2;
-			et2.value=5;
-			cb.Write(&et2);
-			ElemType et3;
-			cb.Read(&et3);
-			ElemType et4;
-			cb.Read(&et4);
-		}
+		//TEST_METHOD(TestMethod6)
+		//{
+		//	CircularBuffer<ElemType> cb;
+		//	cb.Init(512);
+		//	ElemType et;
+		//	et.value = 4;
+		//	cb.Write(&et);
+		//	ElemType et2;
+		//	et2.value=5;
+		//	cb.Write(&et2);
+		//	ElemType et3;
+		//	cb.Read(&et3);
+		//	ElemType et4;
+		//	cb.Read(&et4);
+		//}
 
-		TEST_METHOD(TestMethod7)
+		//TEST_METHOD(TestMethod7)
+		//{
+		//	CircularBuffer<ElemType> cb;
+		//	cb.Init(512);
+		//	for(int i=0; i<512; i++)
+		//	{
+		//		ElemType* e = new ElemType();
+		//		e->value = i;
+		//		cb.Write(e);
+		//	}
+		//	for(int j=0; j<512; j++)
+		//	{
+		//		ElemType* f = new ElemType();
+		//		cb.Read(f);
+		//	}
+		//}
+
+		TEST_METHOD(TestMethod8)
 		{
-			CircularBuffer<ElemType> cb;
+			CircularBuffer<RequestData> cb;
 			cb.Init(512);
-			for(int i=0; i<512; i++)
-			{
-				ElemType* e = new ElemType();
-				e->value = i;
-				cb.Write(e);
-			}
-			for(int j=0; j<512; j++)
-			{
-				ElemType* f = new ElemType();
-				cb.Read(f);
-			}
+			RequestData* rd0 = new RequestData();
+			rd0->SetMessageData("Test1");
+			cb.Write(rd0);
+			rd0 = new RequestData();
+			rd0->SetMessageData("Test2");
+			cb.Write(rd0);
+
+			RequestData* rdo1 = new RequestData();
+			cb.Read(rdo1);
+			RequestData* rdo2 = new RequestData();
+			cb.Read(rdo2);
 		}
 
 	};

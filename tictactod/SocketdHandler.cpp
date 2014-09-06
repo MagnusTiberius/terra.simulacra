@@ -5,16 +5,18 @@ SocketdHandler::SocketdHandler(SOCKET clientSocket):
 		ThreadHandler()
 {
 	m_clientSocket = clientSocket;
-	requestDataManager = RequestDataManager::Instance();
+	requestDataManager = bbg::RequestDataManager<bbg::RequestData>::Instance();
 }
 
 SocketdHandler::~SocketdHandler()
 {
+	closesocket(m_clientSocket);
 	delete requestDataManager;
 }
 
 void SocketdHandler::SetSocket(SOCKET socket)
 {
+	closesocket(m_clientSocket);
 	m_clientSocket = socket;
 	isDone = false;
 }
@@ -56,16 +58,19 @@ unsigned SocketdHandler::ThreadHandlerProc(void)
 		//printf("Content 2: %s\n", sbuf);
 		//printf("^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n\n\n");
 		std::vector<string> listReceive = bbg::Util::GatherMessages(sbuf,iResult);
-		requestDataManager->GrantWriterAccess();
+		int ctr = 0;
 		for(auto itm : listReceive)
 		{
-			auto requestData = new RequestData();
+			ctr++;
+			auto requestData = new bbg::RequestData();
 			std::string ssbuf(sbuf);
-			requestData->SetMessage(itm);
-			printf("Content 2*: %s\n", itm.c_str());
+			requestData->SetMessageData(itm);
+			requestData->SetSocket((int)m_clientSocket);
+			printf("Data Pushed: [socket=%d] [thread=%d] [loop=%d] %s  \n", (int)m_clientSocket, GetCurrentThreadId(), ctr, itm.c_str());
+			requestDataManager->GrantWriterAccess();
 			requestDataManager->AddRequestData(requestData);
+			requestDataManager->ReleaseWriterAccess();
 		}
-		requestDataManager->ReleaseWriterAccess();
 		if (iResult > 0) 
 		{
 			printf("Bytes received: %d\n", iResult);

@@ -21,6 +21,6 @@ public:
 private:
 	SOCKET m_clientSocket;
 	BOOL isDone;
-	RequestDataManager* requestDataManager;
+	bbg::RequestDataManager<bbg::RequestData>* requestDataManager;
 };
 

@@ -1,5 +1,6 @@
 #include "SocketClient.h"
 
+namespace bbg {
 
 SocketClient::SocketClient(std::wstring domain, int port)
 	:Socket(domain,port)
@@ -40,4 +41,6 @@ SocketClient::~SocketClient(void)
 {
 	closesocket(ConnectSocket);
 	WSACleanup();
+}
+
 }

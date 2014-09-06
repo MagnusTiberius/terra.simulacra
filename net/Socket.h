@@ -1,6 +1,4 @@
 #pragma once
-
-
 #include <winsock2.h>
 #include <ws2tcpip.h>
 #include <stdlib.h>
@@ -16,12 +14,14 @@ class Socket
 public:
 	Socket(void);
 	Socket(std::wstring domain, int port);
+	Socket(SOCKET socket);
 	~Socket(void);
 	int Send(char* buffer);
 	int Shutdown();
 	int Receive(char* recvbuf, int recvbuflen);
 	int ConnectToServer();
 	int Listen();
+	SOCKET GetClientSocket();
 	SOCKET Accept(void);
 protected:
 	SOCKET ListenSocket;

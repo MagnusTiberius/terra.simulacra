@@ -32,6 +32,7 @@ void TictactoeServer::Start(void)
 	do {
 		printf("Listening...\n");
 		SOCKET clientSocket = Accept();
+		printf("SOCKET # %d...\n", clientSocket);
 		TictactodThread* t = ReuseThread();
 		if (t != NULL)
 		{

@@ -2,6 +2,7 @@
 
 #include "Socket.h"
 
+namespace bbg {
 
 class SocketClient : public bbg::Socket
 {
@@ -10,3 +11,4 @@ public:
 	~SocketClient(void);
 };
 
+}

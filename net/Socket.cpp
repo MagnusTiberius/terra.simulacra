@@ -4,6 +4,11 @@ namespace bbg {
 
 Socket::Socket() {}
 
+Socket::Socket(SOCKET socket)
+{
+	ConnectSocket = socket;
+}
+
 Socket::Socket(std::wstring domain, int port)
 {
 
@@ -76,6 +81,11 @@ int Socket::ConnectToServer()
 	}
 
 	return 0;
+}
+
+SOCKET Socket::GetClientSocket()
+{
+	return ConnectSocket;
 }
 
 int Socket::Send(char* buffer)

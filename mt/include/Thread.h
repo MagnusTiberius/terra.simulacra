@@ -2,7 +2,7 @@
 #include "Global.h"
 #include "Kernel.h"
 #include "ThreadHandler.h"
-#include "windows.h"
+//#include "windows.h"
 #include <thread>
 
 namespace bbg{
