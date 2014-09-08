@@ -17,7 +17,7 @@ int _tmain(int argc, _TCHAR* argv[])
 	RequestData* d;
 	d = new RequestData();
 	d->SetMessageData("LOGIN test1 ;");
-	sm->OutBufferWrite(d);
+	//sm->OutBufferWrite(d);
 	printf("Send to Write buffer: %s\n", d->GetMessageData().c_str());
 
 	

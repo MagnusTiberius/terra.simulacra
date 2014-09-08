@@ -6,7 +6,7 @@
 
 int _tmain(int argc, _TCHAR* argv[])
 {
-	char* buffer = "This is a test";
+	char* buffer = "SAY test2 \"eiur iewuri oweurioweu rioweu riowue ori us \" ; ";
 	char* receiveBuffer = (char*)malloc(512);
 
 	ClientSocket client(DEFAULT_DOMAIN, (int)DEFAULT_PORT);
