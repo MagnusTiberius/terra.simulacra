@@ -28,6 +28,10 @@ std::string RequestData::GetUserID()
 void RequestData::SetMessageData(std::string v)
 {
 	m_Message = v;
+	int sz=sizeof(char)*v.size()+1;
+	m_charMessage = (char*)malloc(sz);
+	memset(m_charMessage,0,sz);
+	m_charMessage = _strdup(v.c_str());
 }
 
 std::string RequestData::GetMessageData()

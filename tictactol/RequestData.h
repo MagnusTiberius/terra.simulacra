@@ -3,7 +3,10 @@
 #include <string>
 #include <map>
 
+
+
 namespace bbg {
+
 
 class RequestData
 {
@@ -21,7 +24,11 @@ private:
 	std::string m_UserID;
 	std::string m_Message;
 	int m_Socket;
+	char* m_charMessage;
 };
+
+
+
 
 }
 

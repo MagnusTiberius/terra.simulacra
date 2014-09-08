@@ -31,7 +31,6 @@ SocketClient::SocketClient(std::wstring domain, int port)
 
 	if (ConnectSocket == INVALID_SOCKET) {
 		printf("Unable to connect to server!\n");
-		WSACleanup();
 		return;
 	}
 }

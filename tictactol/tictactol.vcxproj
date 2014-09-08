@@ -82,9 +82,14 @@
     <ClInclude Include="BoardManager.h" />
     <ClInclude Include="BroadcastHandler.h" />
     <ClInclude Include="BroadcastThread.h" />
+    <ClInclude Include="DataManager.h" />
     <ClInclude Include="RequestData.h" />
     <ClInclude Include="RequestDataAgents.h" />
     <ClInclude Include="RequestDataManager.h" />
+    <ClInclude Include="Singleton.h" />
+    <ClInclude Include="SocketHandler.h" />
+    <ClInclude Include="SocketManager.h" />
+    <ClInclude Include="SocketThread.h" />
     <ClInclude Include="User.h" />
     <ClInclude Include="Util.h" />
   </ItemGroup>
@@ -96,6 +101,8 @@
     <ClCompile Include="RequestData.cpp" />
     <ClCompile Include="RequestDataAgents.cpp" />
     <ClCompile Include="RequestDataManager.cpp" />
+    <ClCompile Include="SocketHandler.cpp" />
+    <ClCompile Include="SocketThread.cpp" />
     <ClCompile Include="User.cpp" />
     <ClCompile Include="Util.cpp" />
   </ItemGroup>

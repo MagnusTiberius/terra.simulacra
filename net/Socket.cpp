@@ -140,6 +140,11 @@ int Socket::Listen()
 		WSACleanup();
 		return 1;
 	}
+
+	int iOptVal = 400;
+    int iOptLen = sizeof (int);
+
+	iResult = getsockopt(ListenSocket, SOL_SOCKET, SO_RCVTIMEO, (char *) &iOptVal, &iOptLen);
 	return 0;
 }
 

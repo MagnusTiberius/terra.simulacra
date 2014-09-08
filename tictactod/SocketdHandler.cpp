@@ -42,21 +42,13 @@ unsigned SocketdHandler::ThreadHandlerProc(void)
 	int recvbuflen = DEFAULT_BUFLEN;
 	int iResult;
 	auto boardManager = bbg::BoardManager::Instance();
-
 	isDone = false;
-
 	while ( true ) 
 	{
 		iResult = recv(m_clientSocket, recvbuf, recvbuflen, 0);
-		//printf("VVVVVVVVVVVVVVVVVVVVVVVVVVVVVV\n");
-		//printf("Bytes received: %d\n", iResult);
-		//printf("Content: %s\n", recvbuf);
-		//printf("------------------------------\n");
 		char* sbuf = (char*)malloc(sizeof(char)*iResult);
 		memset(sbuf,0,iResult);
 		memcpy(sbuf,&recvbuf[0],iResult);
-		//printf("Content 2: %s\n", sbuf);
-		//printf("^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n\n\n");
 		std::vector<string> listReceive = bbg::Util::GatherMessages(sbuf,iResult);
 		int ctr = 0;
 		for(auto itm : listReceive)
@@ -66,7 +58,8 @@ unsigned SocketdHandler::ThreadHandlerProc(void)
 			std::string ssbuf(sbuf);
 			requestData->SetMessageData(itm);
 			requestData->SetSocket((int)m_clientSocket);
-			printf("Data Pushed: [socket=%d] [thread=%d] [loop=%d] %s  \n", (int)m_clientSocket, GetCurrentThreadId(), ctr, itm.c_str());
+			printf("Data Pushed: [socket=%d] [thread=%d] [loop=%d] %s  \n", 
+					(int)m_clientSocket, GetCurrentThreadId(), ctr, itm.c_str());
 			requestDataManager->GrantWriterAccess();
 			requestDataManager->AddRequestData(requestData);
 			requestDataManager->ReleaseWriterAccess();
@@ -84,8 +77,11 @@ unsigned SocketdHandler::ThreadHandlerProc(void)
 				loginId = s[1];
 				printf("Login command: %s\n", loginId.c_str());
 				bbg::User* user = new bbg::User();
-				user->SetLoginId(loginId);
-				boardManager->Create(user);
+				printf("-11");
+				//user->SetLoginId(loginId);
+				printf("-12");
+				//boardManager->Create(user);
+				printf("-13");
 			}
 			if (action.compare("SAY") == 0)
 			{
@@ -103,16 +99,6 @@ unsigned SocketdHandler::ThreadHandlerProc(void)
 				isDone = true;
 				printf("Server shutting down... \n");
 			}
-			// Echo the buffer back to the sender
-			//int iSendResult = send(m_clientSocket, recvbuf, iResult, 0);
-			//if (iSendResult == SOCKET_ERROR) {
-			//	printf("send failed with error: %d\n", WSAGetLastError());
-			//	closesocket(m_clientSocket);
-			//	//WSACleanup();
-			//	isDone = true;
-			//	break;
-			//}
-			//printf("Bytes sent: %d\n", iSendResult);
 		}
 		else if (iResult == 0)
 		{
@@ -125,21 +111,16 @@ unsigned SocketdHandler::ThreadHandlerProc(void)
 		{
 			printf("recv failed with error: %d\n", WSAGetLastError());
 			closesocket(m_clientSocket);
-			//WSACleanup();
 			isDone = true;
 			break;
 		}
-
-
 		if (iResult == 0 || iResult == -1)
 		{
 			printf("Socket shutdown...\n");
-			// shutdown the connection since we're done
 			iResult = shutdown(m_clientSocket, 1);
 			if (iResult == SOCKET_ERROR) {
 				printf("shutdown failed with error: %d\n", WSAGetLastError());
 				closesocket(m_clientSocket);
-				//WSACleanup();
 				isDone = true;
 			}
 			printf("Handler exiting...\n");
