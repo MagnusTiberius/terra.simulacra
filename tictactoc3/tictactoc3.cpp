@@ -17,11 +17,11 @@ int _tmain(int argc, _TCHAR* argv[])
 	RequestData* d;
 	d = new RequestData();
 	d->SetMessageData("LOGIN test1 ;");
-	//sm->OutBufferWrite(d);
+	sm->OutBufferWrite(d);
 	printf("Send to Write buffer: %s\n", d->GetMessageData().c_str());
 
 	
-	for(int i=0; i<50; i++)
+	for(int i=0; i<500; i++)
 	{
 		std::string quote = Util::GetRandomQuote();
 		d = new RequestData();

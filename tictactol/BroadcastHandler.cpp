@@ -30,12 +30,12 @@ unsigned BroadcastHandler::ThreadHandlerProc(void)
 		handler->ReleaseWriterAccess();
 		if (rd.GetMessageData().compare("#$#")==0)
 		{
-			//printf("Data pulled: nothing\n");
+			//std::cout << "Data pulled empty [thread=" << GetCurrentThreadId() << "] : " << "\n";
 		}
 		else
 		{
 			//printf("Data pulled [%lu]: %s\n", (long)m_tid, rd.GetMessageData().c_str());
-			std::cout << "Data pulled [thread=" << GetCurrentThreadId() << "] : " << rd.GetMessageData().c_str() << "\n";
+			std::cout << "Data pulled value [thread=" << GetCurrentThreadId() << "] : " << rd.GetMessageData().c_str() << " socket=" << rd.GetSocket() << "\n";
 		}
 		std::chrono::milliseconds dura( 10 );
 		std::this_thread::sleep_for( dura );

@@ -45,24 +45,28 @@ unsigned SocketdHandler::ThreadHandlerProc(void)
 	isDone = false;
 	while ( true ) 
 	{
+		printf("Going for receive...\n");
 		iResult = recv(m_clientSocket, recvbuf, recvbuflen, 0);
-		char* sbuf = (char*)malloc(sizeof(char)*iResult);
-		memset(sbuf,0,iResult);
-		memcpy(sbuf,&recvbuf[0],iResult);
-		std::vector<string> listReceive = bbg::Util::GatherMessages(sbuf,iResult);
-		int ctr = 0;
-		for(auto itm : listReceive)
+		if (iResult > 0) 
 		{
-			ctr++;
-			auto requestData = new bbg::RequestData();
-			std::string ssbuf(sbuf);
-			requestData->SetMessageData(itm);
-			requestData->SetSocket((int)m_clientSocket);
-			printf("Data Pushed: [socket=%d] [thread=%d] [loop=%d] %s  \n", 
-					(int)m_clientSocket, GetCurrentThreadId(), ctr, itm.c_str());
-			requestDataManager->GrantWriterAccess();
-			requestDataManager->AddRequestData(requestData);
-			requestDataManager->ReleaseWriterAccess();
+			char* sbuf = (char*)malloc(sizeof(char)*iResult);
+			memset(sbuf,0,iResult);
+			memcpy(sbuf,&recvbuf[0],iResult);
+			std::vector<string> listReceive = bbg::Util::GatherMessages(sbuf,iResult);
+			int ctr = 0;
+			for(auto itm : listReceive)
+			{
+				ctr++;
+				auto requestData = new bbg::RequestData();
+				std::string ssbuf(sbuf);
+				requestData->SetMessageData(itm);
+				requestData->SetSocket((int)m_clientSocket);
+				printf("Data Pushed: [socket=%d] [thread=%d] [loop=%d] %s  \n", 
+						(int)m_clientSocket, GetCurrentThreadId(), ctr, itm.c_str());
+				requestDataManager->GrantWriterAccess();
+				requestDataManager->AddRequestData(requestData);
+				requestDataManager->ReleaseWriterAccess();
+			}
 		}
 		if (iResult > 0) 
 		{
@@ -76,12 +80,9 @@ unsigned SocketdHandler::ThreadHandlerProc(void)
 			{
 				loginId = s[1];
 				printf("Login command: %s\n", loginId.c_str());
-				bbg::User* user = new bbg::User();
-				printf("-11");
+				//bbg::User* user = new bbg::User();
 				//user->SetLoginId(loginId);
-				printf("-12");
 				//boardManager->Create(user);
-				printf("-13");
 			}
 			if (action.compare("SAY") == 0)
 			{
@@ -109,7 +110,60 @@ unsigned SocketdHandler::ThreadHandlerProc(void)
 		}
 		else  
 		{
-			printf("recv failed with error: %d\n", WSAGetLastError());
+			printf("recv() failed with error: %d\n", WSAGetLastError());
+			int errCode = WSAGetLastError();
+			if (errCode==10054)
+			{
+				printf("10054 WSAECONNRESET: Connection reset by peer. Client disconnect.\n");
+			}
+			else if (errCode==10058)
+			{
+				printf("10058 WSAESHUTDOWN : Cannot send after socket shutdown.\n");
+			}
+			else if (errCode==10024)
+			{
+				printf("10024 WSAEMFILE : Too many open files. Too many open sockets. \n");
+			}
+			else if (errCode==10048)
+			{
+				printf("10048 WSAEADDRINUSE : Address already in use. \n");
+			}
+			else if (errCode==10050)
+			{
+				printf("10050 WSAENETDOWN : Network is down. \n");
+			}
+			else if (errCode==10051)
+			{
+				printf("10051 WSAENETUNREACH : Network is unreachable.\n");
+			}
+			else if (errCode==10052)
+			{
+				printf("10052 WSAENETRESET : Network dropped connection on reset.\n");
+			}
+			else if (errCode==10055)
+			{
+				printf("10055 WSAENOBUFS : No buffer space available.\n");
+			}
+			else if (errCode==10057)
+			{
+				printf("10057 WSAENOTCONN : Socket is not connected.\n");
+			}
+			else if (errCode==10059)
+			{
+				printf("10059 WSAETOOMANYREFS : Too many references.\n");
+			}
+			else if (errCode==10060)
+			{
+				printf("10060 WSAETIMEDOUT : Connection timed out.\n");
+			}
+			else if (errCode==10061)
+			{
+				printf("10061 WSAECONNREFUSED : Connection refused.\n");
+			}
+			else
+			{
+				printf("XXXXX UNDEFINED : Undefined error code / condition.\n");
+			}
 			closesocket(m_clientSocket);
 			isDone = true;
 			break;
