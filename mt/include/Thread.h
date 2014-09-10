@@ -15,6 +15,7 @@ namespace bbg{
 	public:
 		~Thread();
 		Thread(ThreadHandler* pcThreadHandler);
+		Thread(ThreadHandler* pcThreadHandler, DWORD creationFlags);
 		DWORD Suspend(void);
 		DWORD Resume(void);
 		BOOL Terminate(DWORD pdwExitCode);
@@ -23,6 +24,7 @@ namespace bbg{
 		LPDWORD GetThreadId(void);
 		BOOL GetExitCode(DWORD* pdwExitCode);
 		void SetHandler(ThreadHandler* pcThreadHandler);
+		void SetHandler(ThreadHandler* pcThreadHandler, DWORD creationFlags);
 	private:
 		Thread(void);
 		static DWORD WINAPI CallThreadHandlerProc(void* pThreadHandler);

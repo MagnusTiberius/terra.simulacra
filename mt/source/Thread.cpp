@@ -8,6 +8,13 @@ namespace bbg{
 		m_hHandle = ::CreateThread(NULL, 0, CallThreadHandlerProc, reinterpret_cast<LPVOID>(m_lpThreadHandler), NULL, m_uiThreadID);
 	}
 
+	Thread::Thread(ThreadHandler* pcThreadHandler, DWORD creationFlags)
+	{
+		m_lpThreadHandler = pcThreadHandler;
+		m_hHandle = ::CreateThread(NULL, 0, CallThreadHandlerProc, reinterpret_cast<LPVOID>(m_lpThreadHandler), creationFlags, m_uiThreadID);
+	}
+
+
 	Thread::Thread(void)
 	{
 		m_hHandle = NULL;
@@ -30,6 +37,17 @@ namespace bbg{
 		m_lpThreadHandler = pcThreadHandler;
 		m_hHandle = ::CreateThread(NULL, 0, CallThreadHandlerProc, reinterpret_cast<LPVOID>(m_lpThreadHandler), NULL, m_uiThreadID);
 	}
+
+	void Thread::SetHandler(ThreadHandler* pcThreadHandler, DWORD creationFlags)
+	{
+		if (m_hHandle != NULL) 
+		{
+			::TerminateThread(m_hHandle, 1);
+		}
+		m_lpThreadHandler = pcThreadHandler;
+		m_hHandle = ::CreateThread(NULL, 0, CallThreadHandlerProc, reinterpret_cast<LPVOID>(m_lpThreadHandler), creationFlags, m_uiThreadID);
+	}
+
 
 	DWORD WINAPI Thread::CallThreadHandlerProc(void* pThreadHandler)
 	{
