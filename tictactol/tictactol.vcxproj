@@ -102,7 +102,6 @@
     <ClCompile Include="RequestDataAgents.cpp" />
     <ClCompile Include="RequestDataManager.cpp" />
     <ClCompile Include="SocketHandler.cpp" />
-    <ClCompile Include="SocketThread.cpp" />
     <ClCompile Include="User.cpp" />
     <ClCompile Include="Util.cpp" />
   </ItemGroup>

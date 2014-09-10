@@ -80,9 +80,9 @@ unsigned SocketdHandler::ThreadHandlerProc(void)
 			{
 				loginId = s[1];
 				printf("Login command: %s\n", loginId.c_str());
-				//bbg::User* user = new bbg::User();
-				//user->SetLoginId(loginId);
-				//boardManager->Create(user);
+				bbg::User* user = new bbg::User();
+				user->SetLoginId(loginId);
+				boardManager->Create(user);
 			}
 			if (action.compare("SAY") == 0)
 			{

@@ -1,10 +1,17 @@
 #include "Util.h"
 #include <time.h> 
+#include "stdio.h"
+#include "stdlib.h"
+#include <random>
+#include <cstdlib>
+#include <iostream>
+#include <ctime>
 
 namespace bbg {
 
 Util::Util(void)
 {
+	srand (time(NULL));
 }
 
 
@@ -48,7 +55,7 @@ string Util::GetRandomQuote()
 	quotes.push_back("There are only 10 different kinds of people in the world: those who know binary and those who don't.");
 	quotes.push_back("Think (design) globally; act (code) locally.");
 	quotes.push_back("Think twice, code once.");
-	quotes.push_back("Time is an excellent teacher; but eventually it kills all its students.");
+	quotes.push_back("Time is an excellent teacher, but eventually it kills all its students.");
 	quotes.push_back("Weeks of programming can save you hours of planning.");
 	quotes.push_back("When a programming language is created that allows programmers to program in simple English, it will be discovered that programmers cannot speak English.");
 	quotes.push_back("Why do we never have time to do it right, but always have time to do it over?");
@@ -61,6 +68,7 @@ string Util::GetRandomQuote()
 	int sz = quotes.size();
 	int m = rand();
 	int n = m % sz;
+	printf("n=%d; m=%d\n",n,m);
 	return quotes[n];
 }
 

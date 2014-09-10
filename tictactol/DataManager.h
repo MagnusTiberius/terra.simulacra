@@ -100,7 +100,7 @@ void DataManager<T>::ReadRequestData(RequestData* d)
 template <class T>
 void DataManager<T>::GrantReaderAccess()
 {
-	m_eNotEmpty.Wait(INFINITE);
+	//m_eNotEmpty.Wait(INFINITE);
     m_mNowriters.Wait(INFINITE);
     m_nReaderSize++;
     m_eNoreaders.Reset();
@@ -121,7 +121,7 @@ void DataManager<T>::ReleaseReaderAccess()
 template <class T>
 void DataManager<T>::GrantWriterAccess()
 {
-	m_eNotEmpty.Wait(INFINITE);
+	//m_eNotEmpty.Wait(INFINITE);
 	m_mNowriters.WaitForTwo( m_eNoreaders, TRUE, INFINITE);
 }
 

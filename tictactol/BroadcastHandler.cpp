@@ -37,8 +37,8 @@ unsigned BroadcastHandler::ThreadHandlerProc(void)
 			//printf("Data pulled [%lu]: %s\n", (long)m_tid, rd.GetMessageData().c_str());
 			std::cout << "Data pulled value [thread=" << GetCurrentThreadId() << "] : " << rd.GetMessageData().c_str() << " socket=" << rd.GetSocket() << "\n";
 		}
-		std::chrono::milliseconds dura( 10 );
-		std::this_thread::sleep_for( dura );
+		//std::chrono::milliseconds dura( 1 );
+		//std::this_thread::sleep_for( dura );
 	}
 	printf("BroadcastHandler::ThreadHandlerProc exiting...\n");
 	return 0;

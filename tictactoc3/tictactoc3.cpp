@@ -19,21 +19,17 @@ int _tmain(int argc, _TCHAR* argv[])
 	d->SetMessageData("LOGIN test1 ;");
 	sm->OutBufferWrite(d);
 	printf("Send to Write buffer: %s\n", d->GetMessageData().c_str());
-
-	
-	for(int i=0; i<500; i++)
+	SocketThread<bbg::RequestData>* socketThread = SocketThread<bbg::RequestData>::Create();
+	for(int i=0; i<1000; i++)
 	{
 		std::string quote = Util::GetRandomQuote();
 		d = new RequestData();
 		std::string sstr = "SAY " +  std::to_string(GetCurrentThreadId()) + " \"" + quote + "\" " + " ;\n";
 		d->SetMessageData(sstr);
 		sm->OutBufferWrite(d);
-		printf("Send to Write buffer: %s\n", sstr.c_str());
+		printf("Sending to Write buffer: %s\n", sstr.c_str());
 	}
-
-	SocketThread<bbg::RequestData>* t1 = SocketThread<bbg::RequestData>::Create();
-
-	t1->Wait(INFINITE);
+	socketThread->Wait(INFINITE);
 	return 0;
 }
 

@@ -35,12 +35,16 @@ unsigned SocketHandler<T>::ThreadHandlerProc(void)
 	while (true)
 	{
 		bbg::RequestData* d = new bbg::RequestData();
+		d->SetMessageData("#*#");
 		sm->OutBufferRead(d);
-		printf("Read Buffer: %s %d\n", d->GetMessageData().c_str(),nCtr++);
-		buf = const_cast<char*>(d->GetMessageData().c_str());
-		char* b = const_cast<char*>(d->GetMessageData().c_str());
-		std::string c = d->GetMessageData();
-		const char* e = c.c_str();
-		iResult = socketClient->Send(const_cast<char*>(e));
+		if (d->GetMessageData().compare("#*#")!=0)
+		{
+			printf("Sending to server: %s %d\n", d->GetMessageData().c_str(),nCtr++);
+			buf = const_cast<char*>(d->GetMessageData().c_str());
+			char* b = const_cast<char*>(d->GetMessageData().c_str());
+			std::string c = d->GetMessageData();
+			const char* e = c.c_str();
+			iResult = socketClient->Send(const_cast<char*>(e));
+		}
 	}
 }

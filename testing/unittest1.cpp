@@ -10,6 +10,9 @@
 
 #include "CircularBuffer.h"
 #include "RequestData.h"
+#include "CircularQueue.h"
+#include "QueueManager.h"
+#include "ClientSocketHandler.h"
 
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 using namespace bbg;
@@ -95,11 +98,46 @@ namespace testing
 			rd0 = new RequestData();
 			rd0->SetMessageData("Test2");
 			cb.Write(rd0);
-
 			RequestData* rdo1 = new RequestData();
 			cb.Read(rdo1);
 			RequestData* rdo2 = new RequestData();
 			cb.Read(rdo2);
+		}
+
+		TEST_METHOD(TestMethod9)
+		{
+			CircularQueue<RequestData> q;
+			RequestData* rd0 = new RequestData();
+			rd0->SetMessageData("Test1");
+			q.Write(rd0);
+			rd0 = new RequestData();
+			rd0->SetMessageData("Test2");
+			q.Write(rd0);
+			RequestData* rdo1 = new RequestData();
+			rdo1 = q.Read();
+			auto msg = rdo1->GetMessageData();
+			rdo1 = q.Read();
+			rdo1 = q.Read();
+		}
+
+		TEST_METHOD(TestMethod10)
+		{
+			QueueManager<RequestData>* qm = QueueManager<RequestData>::Instance();
+			RequestData* rd0 = new RequestData();
+			rd0->SetMessageData("Test1");
+			qm->GrantWriterAccess();
+			qm->AddRequestData(rd0);
+			qm->ReleaseWriterAccess();
+			RequestData* rd1 = new RequestData();
+			qm->GrantWriterAccess();
+			rd1 = qm->ReadRequestData();
+			qm->ReleaseWriterAccess();
+		}
+
+		TEST_METHOD(TestMethod11)
+		{
+			ClientSocketHandler* ch = new ClientSocketHandler();
+			ch->ThreadHandlerProc();
 		}
 
 	};
