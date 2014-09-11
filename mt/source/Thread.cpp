@@ -90,4 +90,9 @@ namespace bbg{
 	{
 		return m_uiThreadID;
 	}
+
+	DWORD Thread::GetThreadId2(void)
+	{
+		return ::GetThreadId(m_hHandle);
+	}
 }

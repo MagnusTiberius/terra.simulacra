@@ -22,6 +22,7 @@ namespace bbg{
 		BOOL SetPriority(int nPriority);
 		int GetPriority(void);
 		LPDWORD GetThreadId(void);
+		DWORD GetThreadId2(void);
 		BOOL GetExitCode(DWORD* pdwExitCode);
 		void SetHandler(ThreadHandler* pcThreadHandler);
 		void SetHandler(ThreadHandler* pcThreadHandler, DWORD creationFlags);
