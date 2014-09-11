@@ -13,6 +13,8 @@
 #include "CircularQueue.h"
 #include "QueueManager.h"
 #include "ClientSocketHandler.h"
+#include "ThreadPool.h"
+#include "TaskThreadHandler.h"
 
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 using namespace bbg;
@@ -138,6 +140,31 @@ namespace testing
 		{
 			ClientSocketHandler* ch = new ClientSocketHandler();
 			ch->ThreadHandlerProc();
+		}
+
+		TEST_METHOD(TestMethod12)
+		{
+			ThreadPool threadPool;
+			TaskThreadHandler job1;
+			threadPool.DispatchThread(&job1);
+			TaskThreadHandler job2;
+			threadPool.DispatchThread(&job2);
+			int n = 0;
+			while (threadPool.IsRunning())
+			{
+				if (n < 100)
+				{
+					::Sleep(500);
+					TaskThreadHandler* moreJobRightHere = new TaskThreadHandler();
+					threadPool.DispatchThread(moreJobRightHere);
+					n++;
+				}
+				if (n >= 100)
+				{
+					threadPool.Shutdown();
+				}
+			}
+			int m = 1;
 		}
 
 	};
