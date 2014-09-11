@@ -65,10 +65,11 @@ string Util::GetRandomQuote()
 	quotes.push_back("Teachers open the door, but you must enter by yourself.");
 	quotes.push_back("Tell me and I forget. Show me and I remember. Involve me and I understand.");
 	quotes.push_back("The first step towards wisdom is calling things by their right names.");
+	quotes.push_back("The best software is simple, elegant, and full of drama - Grady Booch");
 	int sz = quotes.size();
 	int m = rand();
 	int n = m % sz;
-	printf("n=%d; m=%d\n",n,m);
+	//printf("n=%d; m=%d\n",n,m);
 	return quotes[n];
 }
 
