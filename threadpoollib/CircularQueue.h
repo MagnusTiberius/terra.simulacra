@@ -17,9 +17,16 @@ public:
 	T* Read(void);
 	void Write(T* item);
 	bool IsEmpty(void);
+	int Size(void);
 private:
 	std::queue<T*> m_List;
 };
+
+template<class T>
+int CircularQueue<T>::Size(void)
+{
+	return m_List.size();
+}
 
 template<class T>
 CircularQueue<T>::CircularQueue(void)

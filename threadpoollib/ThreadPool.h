@@ -6,7 +6,7 @@
 #include "QueueManager.h"
 
 #define MIN_WORKER 2
-#define MAX_WORKER 5
+#define MAX_WORKER 500
 #define TIMEOUT 60000
 
 using namespace bbg;
@@ -21,6 +21,10 @@ public:
 public:
 	bool IsRunning();
 	void Shutdown();
+	void SetTaskComplete(DWORD threadId);
+	void SetTaskStart(DWORD threadId);
+	void AddWorkerThread(void);
+	bool AllJobsCompleted();
 private:
 	long m_nMinWorker;
 	long m_nMaxWorker;
@@ -29,6 +33,9 @@ private:
 	void InitPool(void);
 	long m_lCurrWorkerCount;
 	bool m_bRunning;
+	long m_nThreadsStarted;
+	bool m_bShuttingDown;
+	Event m_eShutdownOK;
 
 private:
 	class ThreadList
@@ -40,8 +47,10 @@ private:
 		struct THREADITEMINFO
 		{
 			bool bDone;
+			bool bFreeSlot;
 			DWORD threadId;
 			Thread *thread;
+			long lFrequency;
 		};
 		std::map<DWORD, THREADITEMINFO*> m_mList;
 	public:
@@ -53,6 +62,7 @@ private:
 		void ReleaseWriterAccess();
 		void GrantReaderAccess();
 		void ReleaseReaderAccess();
+		THREADITEMINFO * GetThreadInfo(DWORD dwThreadId);
 	private:
 		Mutex m_mNowriters;
 		Event m_eNoreaders;

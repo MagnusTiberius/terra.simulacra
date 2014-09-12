@@ -20,6 +20,7 @@ public:
 	void GrantWriterAccess();
 	void ReleaseWriterAccess();
 	void SetBufferSize(int size);
+	int Size(void);
 protected:
 	bbg::CircularQueue<T> m_RequestDataList;
 	bbg::Mutex m_mNowriters;
@@ -66,8 +67,6 @@ QueueManager<T>::~QueueManager(void)
 {
 }
 
-
-
 template <class T>
 void QueueManager<T>::AddRequestData(T* d)
 {
@@ -113,5 +112,12 @@ void QueueManager<T>::ReleaseWriterAccess()
 {
 	m_mNowriters.Release();
 }
+
+template <class T>
+int QueueManager<T>::Size(void)
+{
+	return m_RequestDataList.Size();
+}
+
 
 }

@@ -80,7 +80,6 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <Text Include="..\net\ReadMe.txt" />
     <Text Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
