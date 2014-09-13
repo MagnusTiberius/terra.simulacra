@@ -59,7 +59,7 @@ QueueManager<T>::QueueManager(int size)
 template <class T>
 void QueueManager<T>::SetBufferSize(int size)
 {
-	m_RequestDataList.Init(size);
+	//m_RequestDataList.Init(size);
 }
 
 template <class T>

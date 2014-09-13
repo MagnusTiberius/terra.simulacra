@@ -95,7 +95,7 @@ bool ThreadPool::DispatchThread(ThreadHandler* handler)
 	}
 	else
 	{
-		printf("Server is shutting down, cannot add additional jobs.\n");
+		printf("[0x%08lx] Server is shutting down, cannot add additional jobs.\n", GetCurrentThreadId());
 		return false;
 	}
 }
@@ -107,7 +107,7 @@ bool ThreadPool::IsRunning()
 
 void ThreadPool::Shutdown()
 {
-	printf("Shutdown event signalled.\n");
+	printf("[0x%08lx] Shutdown event signalled.\n", GetCurrentThreadId());
 	m_bShuttingDown = true;
 }
 
@@ -126,6 +126,11 @@ void ThreadPool::SetTaskStart(DWORD threadId)
 	threadInfo->bDone = false;
 	printf("[0x%08lx] TaskStart\n", GetCurrentThreadId());
 	m_nThreadsStarted++;
+}
+
+int ThreadPool::GetThreadListSize(void)
+{
+	return m_ThreadList.Size();
 }
 
 // =============================================================================
@@ -227,6 +232,11 @@ ThreadPool::ThreadList::THREADITEMINFO* ThreadPool::ThreadList::GetThreadInfo(DW
 	itr = m_mList.find(dwThreadId);
 	THREADITEMINFO* threadinfo = itr->second;
 	return threadinfo;
+}
+
+int ThreadPool::ThreadList::Size()
+{
+	return m_mList.size();
 }
 // =============================================================================
 //

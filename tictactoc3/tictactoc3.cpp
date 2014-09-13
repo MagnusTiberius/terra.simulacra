@@ -20,7 +20,7 @@ int _tmain(int argc, _TCHAR* argv[])
 	sm->OutBufferWrite(d);
 	printf("Send to Write buffer: %s\n", d->GetMessageData().c_str());
 	SocketThread<bbg::RequestData>* socketThread = SocketThread<bbg::RequestData>::Create();
-	for(int i=0; i<1000; i++)
+	for(int i=0; i<10; i++)
 	{
 		std::string quote = Util::GetRandomQuote();
 		d = new RequestData();
