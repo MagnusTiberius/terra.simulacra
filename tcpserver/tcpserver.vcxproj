@@ -84,6 +84,12 @@
     <Text Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Command.h" />
+    <ClInclude Include="CommandAnalyticsClient.h" />
+    <ClInclude Include="CommandLogin.h" />
+    <ClInclude Include="CommandManager.h" />
+    <ClInclude Include="IasClientHandler.h" />
+    <ClInclude Include="ICommand.h" />
     <ClInclude Include="ListManager.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
@@ -91,6 +97,12 @@
     <ClInclude Include="TcpServerD.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Command.cpp" />
+    <ClCompile Include="CommandAnalyticsClient.cpp" />
+    <ClCompile Include="CommandLogin.cpp" />
+    <ClCompile Include="CommandManager.cpp" />
+    <ClCompile Include="IasClientHandler.cpp" />
+    <ClCompile Include="ICommand.cpp" />
     <ClCompile Include="ListManager.cpp" />
     <ClCompile Include="stdafx.cpp" />
     <ClCompile Include="TcpClientHandler.cpp" />

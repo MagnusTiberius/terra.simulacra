@@ -28,11 +28,11 @@ unsigned ThreadPool::ThreadHandlerProc(void)
 {
 	while(true)
 	{
-		//printf("[0x%08lx] ThreadPool::ThreadHandlerProc have a job to do\n", GetCurrentThreadId());
+		printf("[0x%08lx] ThreadPool::ThreadHandlerProc have a job to do\n", GetCurrentThreadId());
 		DispatchHandler* task;
-		m_pTaskList->GrantWriterAccess();
+		m_pTaskList->GrantReaderAccessEx();
 		task = m_pTaskList->ReadRequestData();
-		m_pTaskList->ReleaseWriterAccess();
+		m_pTaskList->ReleaseReaderAccessEx();
 		if (task != NULL)
 		{
 			SetTaskStart(GetCurrentThreadId());
@@ -86,16 +86,16 @@ bool ThreadPool::DispatchThread(ThreadHandler* handler)
 		{
 			AddWorkerThread();
 		}
-		//printf("Adding a task/job.\n");
+		printf("[0x%08lx] Adding a task/job. \n", GetCurrentThreadId());
 		DispatchHandler* task = new DispatchHandler(handler);
-		m_pTaskList->GrantWriterAccess();
+		m_pTaskList->GrantWriterAccessEx();
 		m_pTaskList->AddRequestData(task);
-		m_pTaskList->ReleaseWriterAccess();
+		m_pTaskList->ReleaseWriterAccessEx();
 		return true;
 	}
 	else
 	{
-		printf("[0x%08lx] Server is shutting down, cannot add additional jobs.\n", GetCurrentThreadId());
+		printf("[0x%08lx] Server is shutting down, cannot add additional jobs. \n", GetCurrentThreadId());
 		return false;
 	}
 }
@@ -107,7 +107,7 @@ bool ThreadPool::IsRunning()
 
 void ThreadPool::Shutdown()
 {
-	printf("[0x%08lx] Shutdown event signalled.\n", GetCurrentThreadId());
+	printf("[0x%08lx] Shutdown event signalled. \n", GetCurrentThreadId());
 	m_bShuttingDown = true;
 }
 
@@ -126,11 +126,6 @@ void ThreadPool::SetTaskStart(DWORD threadId)
 	threadInfo->bDone = false;
 	printf("[0x%08lx] TaskStart\n", GetCurrentThreadId());
 	m_nThreadsStarted++;
-}
-
-int ThreadPool::GetThreadListSize(void)
-{
-	return m_ThreadList.Size();
 }
 
 // =============================================================================
@@ -232,11 +227,6 @@ ThreadPool::ThreadList::THREADITEMINFO* ThreadPool::ThreadList::GetThreadInfo(DW
 	itr = m_mList.find(dwThreadId);
 	THREADITEMINFO* threadinfo = itr->second;
 	return threadinfo;
-}
-
-int ThreadPool::ThreadList::Size()
-{
-	return m_mList.size();
 }
 // =============================================================================
 //

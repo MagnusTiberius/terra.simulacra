@@ -42,6 +42,16 @@ namespace bbg{
 		return ::WaitForMultipleObjectsEx(2, handles, bWaitAll, dwMilliseconds, true);
 	}
 
+	DWORD Kernel::WaitForThree(WaitableObject &rWaitableObject, WaitableObject &rWaitableObject2, bool bWaitAll, DWORD dwMilliseconds)
+	{
+		HANDLE handles[3];
+		handles[0] = m_hHandle;
+		handles[1] = rWaitableObject.GetHandle();
+		handles[2] = rWaitableObject2.GetHandle();
+		return ::WaitForMultipleObjectsEx(3, handles, bWaitAll, dwMilliseconds, true);
+	}
+
+
 	HANDLE Kernel::GetHandle(void) const
 	{
 		if (this != NULL)

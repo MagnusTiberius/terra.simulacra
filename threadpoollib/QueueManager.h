@@ -17,14 +17,20 @@ public:
 	T* ReadRequestData();
 	void GrantReaderAccess();
 	void ReleaseReaderAccess();
+	void GrantReaderAccessEx();
+	void ReleaseReaderAccessEx();
 	void GrantWriterAccess();
 	void ReleaseWriterAccess();
+	void GrantWriterAccessEx();
+	void ReleaseWriterAccessEx();
 	void SetBufferSize(int size);
 	int Size(void);
 protected:
 	bbg::CircularQueue<T> m_RequestDataList;
 	bbg::Mutex m_mNowriters;
 	bbg::Event m_eNoreaders;
+	bbg::Event m_eNoItems;
+	bbg::Event m_eHasItems;
 	int m_nReaderSize;
 private:
 	QueueManager(void);
@@ -45,7 +51,7 @@ QueueManager<T>* QueueManager<T>::Instance(void) {
 
 template <class T>
 QueueManager<T>::QueueManager(void)
-	: m_mNowriters(), m_eNoreaders(TRUE,TRUE)
+	: m_mNowriters(), m_eNoreaders(TRUE, TRUE), m_eNoItems(TRUE, TRUE), m_eHasItems(TRUE, TRUE)
 {
 	m_nReaderSize=0;
 }
@@ -102,6 +108,21 @@ void QueueManager<T>::ReleaseReaderAccess()
 }
 
 template <class T>
+void QueueManager<T>::GrantReaderAccessEx()
+{
+	m_mNowriters.WaitForTwo(m_eHasItems, TRUE, INFINITE);
+}
+
+template <class T>
+void QueueManager<T>::ReleaseReaderAccessEx()
+{
+	m_mNowriters.Release();
+	if (m_RequestDataList.Size() == 0) 
+		m_eHasItems.Reset();
+}
+
+
+template <class T>
 void QueueManager<T>::GrantWriterAccess()
 {
 	m_mNowriters.WaitForTwo( m_eNoreaders, TRUE, INFINITE);
@@ -112,6 +133,20 @@ void QueueManager<T>::ReleaseWriterAccess()
 {
 	m_mNowriters.Release();
 }
+
+template <class T>
+void QueueManager<T>::GrantWriterAccessEx()
+{
+	m_mNowriters.Wait(INFINITE);
+}
+
+template <class T>
+void QueueManager<T>::ReleaseWriterAccessEx()
+{
+	m_mNowriters.Release();
+	m_eHasItems.Set();
+}
+
 
 template <class T>
 int QueueManager<T>::Size(void)

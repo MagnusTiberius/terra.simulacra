@@ -1,5 +1,6 @@
 #include "TcpServerD.h"
 
+namespace bbg {
 
 TcpServerD* TcpServerD::_instance = 0;
 
@@ -17,20 +18,21 @@ TcpServerD* TcpServerD::Instance() {
 
 void TcpServerD::Start(void)
 {
+	m_pCommandManager = CommandManager::Instance();
 	m_pListManager = new ListManager();
 	while (threadPool.IsRunning())
 	{
-		printf("Listening...\n");
+		printf("[0x%08lx] TcpServerD::Start() Listening \n", GetCurrentThreadId());
 		SOCKET clientSocket = Accept();
 		printf("SOCKET # %d...\n", clientSocket);
 		TcpClientHandler* handler = new TcpClientHandler(clientSocket);
 		threadPool.DispatchThread((ThreadHandler*)handler);
-		auto sz = threadPool.GetThreadListSize();
-		printf("TCP Server Worker Count: %d\n", sz);
 	}
 }
 
 ThreadPool* TcpServerD::GetThreadPool()
 {
 	return &threadPool;
+}
+
 }

@@ -3,6 +3,11 @@
 #include "ThreadHandler.h"
 #include "Queuemanager.h"
 #include "RequestData.h"
+#include "CommandManager.h"
+#include "Command.h"
+#include "CommandAnalyticsClient.h"
+
+namespace bbg {
 
 using namespace bbg;
 
@@ -53,3 +58,4 @@ private:
 	QueueManager<RequestData>* requestDataManager;
 };
 
+}

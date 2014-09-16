@@ -14,6 +14,7 @@ TcpClientHandler::~TcpClientHandler()
 }
 unsigned TcpClientHandler::ThreadHandlerProc(void)
 {
+	CommandManager* commandManager = CommandManager::Instance();
 	requestDataManager = QueueManager<RequestData>::Instance();
 	char recvbuf[DEFAULT_BUFLEN];
 	int recvbuflen = DEFAULT_BUFLEN;
@@ -40,9 +41,9 @@ unsigned TcpClientHandler::ThreadHandlerProc(void)
 				requestData->SetSocket((int)m_socket);
 				printf("[0x%08lx] Data Pushed: [socket=%d] [thread=%d] [loop=%d] %s  \n", GetCurrentThreadId() ,
 						(int)m_socket, GetCurrentThreadId(), ctr, itm.c_str());
-				requestDataManager->GrantWriterAccess();
+				requestDataManager->GrantWriterAccessEx();
 				requestDataManager->AddRequestData(requestData);
-				requestDataManager->ReleaseWriterAccess();
+				requestDataManager->ReleaseWriterAccessEx();
 			}
 		}
 		if (iResult > 0) 

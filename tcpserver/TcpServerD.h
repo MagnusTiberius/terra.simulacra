@@ -7,8 +7,13 @@
 #include "ThreadHandler.h"
 #include "ListManager.h"
 #include "TcpClientHandler.h"
+#include "CommandManager.h"
 
-class TcpServerD:public SocketServer
+namespace bbg {
+
+using namespace bbg;
+
+class TcpServerD :public SocketServer
 {
 public:
 	TcpServerD();
@@ -19,7 +24,8 @@ public:
 private:
 	ThreadPool threadPool;
 	ListManager* m_pListManager;
+	CommandManager* m_pCommandManager;
 	static TcpServerD* _instance;
 };
 
-
+}

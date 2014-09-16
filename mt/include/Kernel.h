@@ -19,6 +19,7 @@ namespace bbg{
 		DWORD Status(void) const;
 		DWORD Wait(DWORD dwMilliseconds);
 		DWORD WaitForTwo(WaitableObject &rWaitableObject, bool bWaitAll, DWORD dwMilliseconds);
+		DWORD WaitForThree(WaitableObject &rWaitableObject, WaitableObject &rWaitableObject2, bool bWaitAll, DWORD dwMilliseconds);
 		HANDLE GetHandle(void) const;
 		operator HANDLE() const;
 	};

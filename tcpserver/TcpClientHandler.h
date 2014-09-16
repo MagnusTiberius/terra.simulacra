@@ -6,10 +6,15 @@
 #include "TaskThreadHandler.h"
 #include "ThreadHandler.h"
 #include "QueueManager.h"
+//#include "iaslib.h"
+#include "CommandManager.h"
+#include "Command.h"
+
+namespace bbg {
 
 using namespace bbg;
 
-class TcpClientHandler:ThreadHandler
+class TcpClientHandler :ThreadHandler
 {
 public:
 	TcpClientHandler();
@@ -21,3 +26,5 @@ private:
 	BOOL isDone;
 	QueueManager<RequestData>* requestDataManager;
 };
+
+}

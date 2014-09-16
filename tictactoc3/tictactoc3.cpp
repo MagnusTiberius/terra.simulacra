@@ -20,8 +20,9 @@ int _tmain(int argc, _TCHAR* argv[])
 	sm->OutBufferWrite(d);
 	printf("Send to Write buffer: %s\n", d->GetMessageData().c_str());
 	SocketThread<bbg::RequestData>* socketThread = SocketThread<bbg::RequestData>::Create();
-	for(int i=0; i<10; i++)
+	for(int i=0; i<14500; i++)
 	{
+		::Sleep(10);
 		std::string quote = Util::GetRandomQuote();
 		d = new RequestData();
 		std::string sstr = "SAY " +  std::to_string(GetCurrentThreadId()) + " \"" + quote + "\" " + " ;\n";
@@ -29,6 +30,9 @@ int _tmain(int argc, _TCHAR* argv[])
 		sm->OutBufferWrite(d);
 		printf("Sending to Write buffer: %s\n", sstr.c_str());
 	}
+	std::string sstr = "QUIT ";
+	d->SetMessageData(sstr);
+	sm->OutBufferWrite(d);
 	socketThread->Wait(INFINITE);
 	return 0;
 }

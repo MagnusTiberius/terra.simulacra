@@ -32,9 +32,10 @@ private:
 	SocketManager(void);
 public:
 	void OutBufferWrite(RequestData* d);
-	void OutBufferRead(RequestData* d);
+	//void OutBufferRead(RequestData* d);
 	void InBufferWrite(RequestData* d);
 	void InBufferRead(RequestData* d);
+	RequestData* OutBufferRead();
 };
 
 template <class T>
@@ -78,33 +79,35 @@ ReadDataManager* SocketManager<T>::GetWriteBuffer()
 template <class T>
 void SocketManager<T>::OutBufferWrite(RequestData* d)
 {
-	writeBuffer->GrantWriterAccess();
+	writeBuffer->GrantWriterAccessEx();
 	writeBuffer->AddRequestData(d);
-	writeBuffer->ReleaseWriterAccess();
+	writeBuffer->ReleaseWriterAccessEx();
 }
 
 template <class T>
-void SocketManager<T>::OutBufferRead(RequestData* d)
+RequestData* SocketManager<T>::OutBufferRead()
 {
-	writeBuffer->GrantWriterAccess();
-	writeBuffer->ReadRequestData(d);
-	writeBuffer->ReleaseWriterAccess();
+	RequestData* d = NULL;
+	writeBuffer->GrantReaderAccessEx();
+	d = writeBuffer->ReadRequestData();
+	writeBuffer->ReleaseReaderAccessEx();
+	return d;
 }
 
 template <class T>
 void SocketManager<T>::InBufferWrite(RequestData* d)
 {
-	writeBuffer->GrantWriterAccess();
-	writeBuffer->AddRequestData(d);
-	writeBuffer->ReleaseWriterAccess();
+	readBuffer->GrantWriterAccessEx();
+	readBuffer->AddRequestData(d);
+	readBuffer->ReleaseWriterAccessEx();
 }
 
 template <class T>
 void SocketManager<T>::InBufferRead(RequestData* d)
 {
-	readBuffer->GrantWriterAccess();
+	readBuffer->GrantReaderAccessEx();
 	readBuffer->ReadRequestData(d);
-	readBuffer->ReleaseWriterAccess();
+	readBuffer->ReleaseReaderAccessEx();
 	return;
 }
 
