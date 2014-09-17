@@ -13,26 +13,26 @@ using namespace bbg;
 
 int _tmain(int argc, _TCHAR* argv[])
 {
-	SocketManager<RequestData>* sm = SocketManager<RequestData>::Instance();
-	RequestData* d;
-	d = new RequestData();
-	d->SetMessageData("LOGIN test1 ;");
-	sm->OutBufferWrite(d);
-	printf("Send to Write buffer: %s\n", d->GetMessageData().c_str());
-	SocketThread<bbg::RequestData>* socketThread = SocketThread<bbg::RequestData>::Create();
-	for(int i=0; i<14500; i++)
+	SocketManager<RequestData>* socketManager = SocketManager<RequestData>::Instance();
+	RequestData* requestData;
+	requestData = new RequestData();
+	requestData->SetMessageData("LOGIN test1 ;");
+	socketManager->OutBufferWrite(requestData);
+	printf("Send to Write buffer: %s\n", requestData->GetMessageData().c_str());
+	SocketThread<RequestData>* socketThread = SocketThread<RequestData>::Create();
+	for(int i=0; i<1000000; i++)
 	{
-		::Sleep(10);
-		std::string quote = Util::GetRandomQuote();
-		d = new RequestData();
-		std::string sstr = "SAY " +  std::to_string(GetCurrentThreadId()) + " \"" + quote + "\" " + " ;\n";
-		d->SetMessageData(sstr);
-		sm->OutBufferWrite(d);
-		printf("Sending to Write buffer: %s\n", sstr.c_str());
+		::Sleep(50);
+		std::string randomQuote = Util::GetRandomQuote();
+		requestData = new RequestData();
+		std::string sRandomQuote = "SAY " + std::to_string(GetCurrentThreadId()) + " \"" + randomQuote + "\" " + " ;\n";
+		requestData->SetMessageData(sRandomQuote);
+		socketManager->OutBufferWrite(requestData);
+		printf("Sending to Write buffer: %s\n", sRandomQuote.c_str());
 	}
-	std::string sstr = "QUIT ";
-	d->SetMessageData(sstr);
-	sm->OutBufferWrite(d);
+	std::string sQuit = "QUIT ";
+	requestData->SetMessageData(sQuit);
+	socketManager->OutBufferWrite(requestData);
 	socketThread->Wait(INFINITE);
 	return 0;
 }
