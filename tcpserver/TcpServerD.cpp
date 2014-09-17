@@ -18,6 +18,7 @@ TcpServerD* TcpServerD::Instance() {
 
 void TcpServerD::Start(void)
 {
+	connectionList = ConnectionManager::Instance();
 	m_pCommandManager = CommandManager::Instance();
 	m_pListManager = new ListManager();
 	while (threadPool.IsRunning())
@@ -26,6 +27,7 @@ void TcpServerD::Start(void)
 		SOCKET clientSocket = Accept();
 		printf("SOCKET # %d...\n", clientSocket);
 		TcpClientHandler* handler = new TcpClientHandler(clientSocket);
+		connectionList->Add((int)clientSocket, new ConnectedSocketInfo((int)clientSocket, handler));
 		threadPool.DispatchThread((ThreadHandler*)handler);
 	}
 }

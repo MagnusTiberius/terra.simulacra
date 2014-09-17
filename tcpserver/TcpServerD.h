@@ -8,10 +8,15 @@
 #include "ListManager.h"
 #include "TcpClientHandler.h"
 #include "CommandManager.h"
+#include "ConnectionManager.h"
+
+#include <map>
+#include <string>
 
 namespace bbg {
 
 using namespace bbg;
+
 
 class TcpServerD :public SocketServer
 {
@@ -26,6 +31,7 @@ private:
 	ListManager* m_pListManager;
 	CommandManager* m_pCommandManager;
 	static TcpServerD* _instance;
+	ConnectionManager* connectionList;
 };
 
 }

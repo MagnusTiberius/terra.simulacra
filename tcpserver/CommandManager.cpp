@@ -27,7 +27,7 @@ unsigned CommandManager::ThreadHandlerProc(void)
 {
 	while (true)
 	{
-		if (m_lWorkerThreadCount < 50)
+		if (m_lWorkerThreadCount < 80)
 		{
 			JobInfo* jobInfo = new JobInfo();
 			jobInfo->Completed = false;

@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project DefaultTargets="Build" ToolsVersion="12.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|Win32">
       <Configuration>Debug</Configuration>
@@ -19,13 +19,13 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v110</PlatformToolset>
+    <PlatformToolset>v120</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
-    <PlatformToolset>v110</PlatformToolset>
+    <PlatformToolset>v120</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
@@ -41,8 +41,8 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>$(SolutionDir)\threadpoollib\;$(SolutionDir)\tictactol\;$(SolutionDir)\mt\;$(SolutionDir)\mt\include\;$(VCInstallDir)include;$(VCInstallDir)atlmfc\include;$(WindowsSDK_IncludePath);$(SolutionDir)\net\</IncludePath>
-    <LibraryPath>$(SolutionDir)\lib;$(SolutionDir)\$(Configuration);$(VCInstallDir)lib;$(VCInstallDir)atlmfc\lib;$(WindowsSDK_LibraryPath_x86);</LibraryPath>
+    <IncludePath>$(SolutionDir)\ias;$(SolutionDir)\threadpoollib\;$(SolutionDir)\tictactol\;$(SolutionDir)\mt\;$(SolutionDir)\mt\include\;$(VCInstallDir)include;$(VCInstallDir)atlmfc\include;$(WindowsSDK_IncludePath);$(SolutionDir)\net\</IncludePath>
+    <LibraryPath>$(SolutionDir)\ias;$(SolutionDir)\lib;$(SolutionDir)\$(Configuration);$(VCInstallDir)lib;$(VCInstallDir)atlmfc\lib;$(WindowsSDK_LibraryPath_x86);</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
@@ -59,7 +59,7 @@
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>threadpoollib.lib;tictactol.lib;ws2_32.lib;mt.lib;net.lib;lib_json.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>libias.lib;ias.lib;ippcoremt.lib;ippcpmt.lib;zlibstat.lib;threadpoollib.lib;tictactol.lib;ws2_32.lib;mt.lib;net.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -84,10 +84,12 @@
     <Text Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="ChannelManager.h" />
     <ClInclude Include="Command.h" />
     <ClInclude Include="CommandAnalyticsClient.h" />
     <ClInclude Include="CommandLogin.h" />
     <ClInclude Include="CommandManager.h" />
+    <ClInclude Include="ConnectionManager.h" />
     <ClInclude Include="IasClientHandler.h" />
     <ClInclude Include="ICommand.h" />
     <ClInclude Include="ListManager.h" />
@@ -97,10 +99,12 @@
     <ClInclude Include="TcpServerD.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="ChannelManager.cpp" />
     <ClCompile Include="Command.cpp" />
     <ClCompile Include="CommandAnalyticsClient.cpp" />
     <ClCompile Include="CommandLogin.cpp" />
     <ClCompile Include="CommandManager.cpp" />
+    <ClCompile Include="ConnectionManager.cpp" />
     <ClCompile Include="IasClientHandler.cpp" />
     <ClCompile Include="ICommand.cpp" />
     <ClCompile Include="ListManager.cpp" />

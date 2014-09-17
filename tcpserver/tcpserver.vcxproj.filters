@@ -27,28 +27,34 @@
     <ClInclude Include="TcpClientHandler.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="IasClientHandler.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
     <ClInclude Include="TcpServerD.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="ListManager.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="CommandManager.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Command.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="CommandAnalyticsClient.h">
+    <ClInclude Include="ICommand.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="CommandLogin.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="IasClientHandler.h">
+    <ClInclude Include="CommandManager.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="ICommand.h">
+    <ClInclude Include="CommandAnalyticsClient.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ConnectionManager.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ChannelManager.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -62,28 +68,34 @@
     <ClCompile Include="TcpClientHandler.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="IasClientHandler.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
     <ClCompile Include="TcpServerD.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="ListManager.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="CommandManager.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Command.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="CommandAnalyticsClient.cpp">
+    <ClCompile Include="ICommand.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="CommandLogin.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="IasClientHandler.cpp">
+    <ClCompile Include="CommandManager.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="ICommand.cpp">
+    <ClCompile Include="CommandAnalyticsClient.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ConnectionManager.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ChannelManager.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

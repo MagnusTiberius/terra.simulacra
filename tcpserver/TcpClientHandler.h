@@ -6,7 +6,7 @@
 #include "TaskThreadHandler.h"
 #include "ThreadHandler.h"
 #include "QueueManager.h"
-//#include "iaslib.h"
+#include "iaslib.h"
 #include "CommandManager.h"
 #include "Command.h"
 
@@ -21,9 +21,10 @@ public:
 	TcpClientHandler(SOCKET socket);
 	~TcpClientHandler();
 	virtual unsigned ThreadHandlerProc(void);
+	bool IsDone(void);
 private:
 	SOCKET m_socket;
-	BOOL isDone;
+	bool isDone;
 	QueueManager<RequestData>* requestDataManager;
 };
 

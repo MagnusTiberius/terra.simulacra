@@ -12,6 +12,12 @@ TcpClientHandler::TcpClientHandler(SOCKET socket)
 TcpClientHandler::~TcpClientHandler()
 {
 }
+
+bool TcpClientHandler::IsDone(void)
+{
+	return isDone;
+}
+
 unsigned TcpClientHandler::ThreadHandlerProc(void)
 {
 	CommandManager* commandManager = CommandManager::Instance();
@@ -49,35 +55,35 @@ unsigned TcpClientHandler::ThreadHandlerProc(void)
 		if (iResult > 0) 
 		{
 			printf("[0x%08lx] Bytes received: %d\n", GetCurrentThreadId(), iResult);
-			std::vector<string> s = bbg::Util::Parse(recvbuf, " ",iResult);
+			//std::vector<string> s = bbg::Util::Parse(recvbuf, " ",iResult);
 
-			std::string action = s[0];
-			std::string loginId = "";
-			std::string sayMesg = "";
-			if (action.compare("LOGIN") == 0)
-			{
-				loginId = s[1];
-				printf("Login command: %s\n", loginId.c_str());
-				bbg::User* user = new bbg::User();
-				user->SetLoginId(loginId);
-				boardManager->Create(user);
-			}
-			if (action.compare("SAY") == 0)
-			{
-				loginId = s[1];
-				sayMesg = s[2];
-				printf("[0x%08lx] Say command: user %s said \"%s\"\n", GetCurrentThreadId(), loginId.c_str(), sayMesg.c_str());
-			}
-			if (action.compare("QUIT") == 0)
-			{
-				printf("Quit command: user %s \n", loginId.c_str());
-				isDone = true;
-			}
-			if (action.compare("SHUTDOWN") == 0)
-			{
-				isDone = true;
-				printf("Server shutting down... \n");
-			}
+			//std::string action = s[0];
+			//std::string loginId = "";
+			//std::string sayMesg = "";
+			//if (action.compare("LOGIN") == 0)
+			//{
+			//	loginId = s[1];
+			//	printf("Login command: %s\n", loginId.c_str());
+			//	bbg::User* user = new bbg::User();
+			//	user->SetLoginId(loginId);
+			//	boardManager->Create(user);
+			//}
+			//if (action.compare("SAY") == 0)
+			//{
+			//	loginId = s[1];
+			//	sayMesg = s[2];
+			//	printf("[0x%08lx] Say command: user %s said \"%s\"\n", GetCurrentThreadId(), loginId.c_str(), sayMesg.c_str());
+			//}
+			//if (action.compare("QUIT") == 0)
+			//{
+			//	printf("Quit command: user %s \n", loginId.c_str());
+			//	isDone = true;
+			//}
+			//if (action.compare("SHUTDOWN") == 0)
+			//{
+			//	isDone = true;
+			//	printf("Server shutting down... \n");
+			//}
 		}
 		else if (iResult == 0)
 		{
