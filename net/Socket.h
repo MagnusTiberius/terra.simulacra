@@ -23,6 +23,7 @@ public:
 	int Listen();
 	SOCKET GetClientSocket();
 	SOCKET Accept(void);
+	bool IsPortAvailable(std::wstring domain, int port);
 protected:
 	SOCKET ListenSocket;
 	SOCKET ClientSocket;
@@ -35,6 +36,8 @@ protected:
 	struct addrinfo *result;
 	struct addrinfo hints;
 	struct addrinfo *ptr;
+protected:
+	int m_currentPort;
 };
 
 }

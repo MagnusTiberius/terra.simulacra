@@ -11,6 +11,14 @@ Socket::Socket(SOCKET socket)
 
 Socket::Socket(std::wstring domain, int port)
 {
+	printf("Original available port #%d \n", port);
+	int findAvailablePort = port;
+	//while (!IsPortAvailable(domain, findAvailablePort))
+	//{
+	//	findAvailablePort++;
+	//	printf("Trying port #%d \n", findAvailablePort);
+	//}
+	printf("Found available port #%d \n", findAvailablePort);
 
 	// Initialize Winsock
 	iResult = WSAStartup(MAKEWORD(2, 2), &wsaData);
@@ -18,6 +26,8 @@ Socket::Socket(std::wstring domain, int port)
 		printf("WSAStartup failed with error: %d\n", iResult);
 		return;
 	}
+	
+	m_currentPort = findAvailablePort;
 
 	ZeroMemory(&hints, sizeof(hints));
 	hints.ai_family = AF_INET;
@@ -25,11 +35,7 @@ Socket::Socket(std::wstring domain, int port)
 	hints.ai_protocol = IPPROTO_TCP;
 	hints.ai_flags = AI_PASSIVE;
 
-	PCSTR m_port = DEFAULT_PORT;
-	if (port != 0)
-	{
-		m_port = (PCSTR)port;
-	}
+	PCSTR m_port = (PCSTR)findAvailablePort;
 	std::string addr(domain.begin(), domain.end());
 	// Resolve the server address and port
 	iResult = getaddrinfo(addr.c_str(), m_port, &hints, &result);
@@ -81,6 +87,52 @@ int Socket::ConnectToServer()
 	}
 
 	return 0;
+}
+
+bool Socket::IsPortAvailable(std::wstring domain, int port)
+{
+	// Initialize Winsock
+	int iStartUpResult = WSAStartup(MAKEWORD(2, 2), &wsaData);
+	if (iStartUpResult != 0) {
+		printf("WSAStartup failed with error: %d\n", iStartUpResult);
+		return false;
+	}
+
+	ZeroMemory(&hints, sizeof(hints));
+	hints.ai_family = AF_INET;
+	hints.ai_socktype = SOCK_STREAM;
+	hints.ai_protocol = IPPROTO_TCP;
+	hints.ai_flags = AI_PASSIVE;
+
+	PCSTR m_port = DEFAULT_PORT;
+	m_port = (PCSTR)port;
+	std::string addr(domain.begin(), domain.end());
+	// Resolve the server address and port
+	int iAddInfoResult = getaddrinfo(addr.c_str(), m_port, &hints, &result);
+	if (iAddInfoResult != 0) {
+		printf("getaddrinfo failed with error: %d\n", iAddInfoResult);
+		freeaddrinfo(result);
+		return false;
+	}
+	//ListenSocket = socket(result->ai_family, result->ai_socktype, result->ai_protocol);
+	//if (ListenSocket == INVALID_SOCKET) {
+	//	printf("socket failed with error: %ld\n", WSAGetLastError());
+	//	freeaddrinfo(result);
+	//	return false;
+	//}
+
+	//iResult = bind(ListenSocket, result->ai_addr, (int)result->ai_addrlen);
+	//if (iResult == SOCKET_ERROR) {
+	//	printf("bind failed with error: %d\n", WSAGetLastError());
+	//	freeaddrinfo(result);
+	//	closesocket(ListenSocket);
+	//	return false;
+	//}
+
+	freeaddrinfo(result);
+	closesocket(ListenSocket);
+	return true;
+
 }
 
 SOCKET Socket::GetClientSocket()
