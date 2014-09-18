@@ -9,9 +9,10 @@
 #include "TcpClientHandler.h"
 #include "CommandManager.h"
 #include "ConnectionManager.h"
-
+#include "ChannelManager.h"
 #include <map>
 #include <string>
+#include "Stage.h"
 
 namespace bbg {
 

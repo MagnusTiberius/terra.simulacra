@@ -63,7 +63,6 @@ private:
 		void GrantReaderAccess();
 		void ReleaseReaderAccess();
 		THREADITEMINFO * GetThreadInfo(DWORD dwThreadId);
-		int Size();
 	private:
 		Mutex m_mNowriters;
 		Event m_eNoreaders;
@@ -84,8 +83,6 @@ private:
 
 public:
 	bool DispatchThread(ThreadHandler* handler);
-	int GetThreadListSize();
-
 private:
 	ThreadList m_ThreadList;
 	QueueManager<DispatchHandler>* m_pTaskList;

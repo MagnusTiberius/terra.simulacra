@@ -85,13 +85,18 @@
   <ItemGroup>
     <ClInclude Include="CircularQueue.h" />
     <ClInclude Include="ClientSocketHandler.h" />
+    <ClInclude Include="Command.h" />
+    <ClInclude Include="ICommand.h" />
     <ClInclude Include="QueueManager.h" />
+    <ClInclude Include="Stage.h" />
     <ClInclude Include="TaskThreadHandler.h" />
     <ClInclude Include="ThreadPool.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="CircularQueue.cpp" />
     <ClCompile Include="ClientSocketHandler.cpp" />
+    <ClCompile Include="Command.cpp" />
+    <ClCompile Include="ICommand.cpp" />
     <ClCompile Include="TaskThreadHandler.cpp" />
     <ClCompile Include="ThreadPool.cpp" />
   </ItemGroup>

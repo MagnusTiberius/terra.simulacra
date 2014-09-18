@@ -18,6 +18,8 @@ TcpServerD* TcpServerD::Instance() {
 
 void TcpServerD::Start(void)
 {
+	Stage<std::string>* m_pStage = Stage<std::string>::Instance();
+	ChannelManager<std::string> *channelManager = ChannelManager<std::string>::Instance();
 	connectionList = ConnectionManager::Instance();
 	m_pCommandManager = CommandManager::Instance();
 	m_pListManager = new ListManager();
